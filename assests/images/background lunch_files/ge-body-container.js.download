@@ -1,0 +1,16 @@
+// Accordion script for Link and Download Cards
+
+var accordionTitle =  document.getElementsByClassName("accordion-title accordion-enable");
+var accordionItem;
+
+for (accordionItem = 0; accordionItem < accordionTitle.length; accordionItem++) {
+  accordionTitle[accordionItem].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var accordionPanel = this.nextElementSibling;
+    if (this.classList.contains('active')) {
+    accordionPanel.classList.add('open');
+    } else {
+    accordionPanel.classList.remove('open');
+    }
+  });
+} 

@@ -1,0 +1,326 @@
+// GE Content Left Right Variant 1 With Carousel Script
+let carouselElm = document.querySelectorAll('.wp-block-custom-ge-content-left-right-variant-1-with-carousel');
+if (carouselElm.length) {
+    carouselLR(carouselElm, false);
+
+    window.addEventListener('resize', function (event) {
+        carouselLR(carouselElm, true);
+    });
+
+    function carouselLR(element, resizeboolean) {
+        let carouselElement = element;
+        let resizeBooleanValue = resizeboolean;
+
+        // script for checking how many time gblox use in page
+        for (let carouselItem = 0; carouselItem < carouselElement.length; carouselItem++) {
+
+            let contentElm = carouselElement[carouselItem].querySelectorAll('.wp-block-custom-ge-carousel-cantent');
+            let dotActiveBgClr, dotBgClr;
+
+            dotActiveBgClr = carouselElement[carouselItem].querySelector('.carousel-nav-dots .dot--icon.active').style.backgroundColor;
+            dotBgClr = carouselElement[carouselItem].querySelector('.carousel-nav-dots .dot--icon.inactive').style.backgroundColor;
+            if (!resizeBooleanValue) {
+                carouselElement[carouselItem].querySelector('.carousel-nav-dots').innerHTML = '';
+                carouselElement[carouselItem].querySelector('.image-carousel-container').innerHTML = '';
+            }
+
+            // script for update slides and dots
+            let activeClass;
+            for (let slideItem = 0; slideItem < contentElm.length; slideItem++) {
+
+                let $parentContainer = contentElm[slideItem].closest('.wp-block-custom-ge-content-left-right-variant-1-with-carousel');
+                (slideItem === 0) ? activeClass = "active" : activeClass = 'inactive';
+
+                let slideImge = contentElm[slideItem].querySelector('.lr-img-section').innerHTML;
+                contentElm[slideItem].setAttribute('data-slide-no', 'slide-' + slideItem);
+                contentElm[slideItem].classList.add(activeClass)
+
+                $parentContainer.querySelector('.carousel-nav-dots').setAttribute('data-bg', dotBgClr)
+                $parentContainer.querySelector('.carousel-nav-dots').setAttribute('data-active-bg', dotActiveBgClr)
+
+                if (!resizeBooleanValue) {
+                    // dot element
+                    let dotElement = document.createElement("i");
+                    dotElement.className = "dot--icon " + activeClass;
+                    dotElement.setAttribute("data-dot-no", "slide-" + slideItem);
+                    dotElement.style.backgroundColor = dotBgClr;
+                    $parentContainer.querySelector('.carousel-nav-dots').appendChild(dotElement);
+
+                    // img element
+                    let imgElement = document.createElement("div");
+                    imgElement.className = "lr-image-carousel-item  " + activeClass;
+                    imgElement.setAttribute("data-img-no", "slide-" + slideItem);
+                    imgElement.style.backgroundColor = dotBgClr;
+                    imgElement.innerHTML = slideImge;
+
+                    $parentContainer.querySelector('.image-carousel-container').appendChild(imgElement);
+                }
+                
+                if (resizeBooleanValue) {
+                    $parentContainer.querySelectorAll('.wp-block-custom-ge-carousel-cantent').forEach(elm => {
+                        elm.getAttribute('data-slide-no') === 'slide-0' ? elm.classList.add('active') : elm.classList.remove('active');
+
+                    });
+                    $parentContainer.querySelectorAll('.lr-image-carousel-item').forEach(elm => {
+                        elm.getAttribute('data-img-no') === 'slide-0' ? elm.classList.add('active') : elm.classList.remove('active');
+
+                    });
+                    $parentContainer.querySelectorAll('.carousel-nav-dots .dot--icon').forEach(elm => {
+                        elm.getAttribute('data-dot-no') === 'slide-0' ? elm.classList.add('active') : elm.classList.remove('active');
+                        elm.getAttribute('data-dot-no') === 'slide-0' ? elm.style.backgroundColor = dotActiveBgClr : elm.style.backgroundColor = dotBgClr;;
+
+                    });
+                }
+
+                contentElm[slideItem].querySelector('.lr-img-section').innerHTML;
+
+            }
+
+            carouselElement[carouselItem].querySelector('.carousel-nav-dots .dot--icon.active').style.backgroundColor = dotActiveBgClr;
+
+            // content script
+            let ContentWidth = contentElm[0].offsetWidth;
+            let totalSlide = contentElm.length;
+            let contDivWidth = ContentWidth * totalSlide;
+            carouselElement[carouselItem].querySelector('.carousel-items').setAttribute('style', 'opacity: 1; width:' + contDivWidth + 'px; transform: translate3d(0px, 0px, 0px);transition: transform 300ms ease 0s;');
+
+            // image script
+            let imgElm = carouselElement[carouselItem].querySelector('.lr-image-carousel-item');
+
+            let imageStyle = getComputedStyle(imgElm);
+            let imageWidth = parseFloat(imageStyle.maxWidth)
+            let imgContWidth = imageWidth * totalSlide;
+            carouselElement[carouselItem].querySelector('.image-carousel-container').setAttribute('style', 'opacity: 1; width:' + imgContWidth + 'px; transform: translate3d(0px, 0px, 0px);transition: transform 300ms ease 0s;');
+
+            // dot script
+            let dotElm = carouselElement[carouselItem].querySelector('.dot--icon');
+            let dotElmLength = carouselElement[carouselItem].querySelectorAll('.dot--icon').length;
+            let dotStyle = getComputedStyle(dotElm);
+            let dotTotalElmWidth = dotElm.offsetWidth + parseFloat(dotStyle.marginLeft) + parseFloat(dotStyle.marginRight);
+            let dotContElmWidth = dotTotalElmWidth * dotElmLength;
+            carouselElement[carouselItem].querySelector('.carousel-nav-dots').setAttribute('style', 'width:' + dotContElmWidth + 'px; transform: translate3d(0px, 0px, 0px);transition: transform 300ms ease 0s;');
+
+
+            hideArrowLR(carouselElement[carouselItem].querySelector('.wp-block-custom-ge-carousel-cantent'));
+        }
+
+
+    }
+
+    // dot click
+    let dotClick = document.querySelectorAll(".carousel-nav-dots .dot--icon");
+    for (let dotClickItem = 0; dotClickItem < dotClick.length; dotClickItem++) {
+        dotClick[dotClickItem].addEventListener("click", function (event) {
+
+            const getNodeindex = elm => [...elm.parentNode.children].indexOf(elm)
+
+            let ActiveSlide = this.getAttribute('data-dot-no')
+            let $parentContainer = this.closest('.wp-block-custom-ge-content-left-right-variant-1-with-carousel');
+            let slideActive = $parentContainer.querySelector('.wp-block-custom-ge-carousel-cantent.active');
+            let ActiveSlideIndex = getNodeindex(slideActive);
+
+            let dotActiveBgClr = $parentContainer.querySelector('.carousel-nav-dots').getAttribute('data-active-bg');
+            let dotBgClr = $parentContainer.querySelector('.carousel-nav-dots').getAttribute('data-bg');
+
+            if (this.classList.contains('active')) {
+                return false
+            } else {
+                let dotElements = $parentContainer.querySelectorAll('.dot--icon');
+                dotElements.forEach(elm => {
+                    elm.classList.remove('active');
+                });
+                let contentElements = $parentContainer.querySelectorAll('.wp-block-custom-ge-carousel-cantent');
+                contentElements.forEach(elm => { elm.classList.remove('active'); });
+                let imgElements = $parentContainer.querySelectorAll('.lr-image-carousel-item');
+                imgElements.forEach(elm => { elm.classList.remove('active'); });
+
+                this.classList.add('active');
+
+                let dotBGClr = $parentContainer.querySelectorAll('.carousel-nav-dots .dot--icon')
+                dotBGClr.forEach(elm => { elm.style.backgroundColor = dotBgClr;; });
+
+                $parentContainer.querySelector('.carousel-nav-dots .dot--icon.active').style.backgroundColor = dotActiveBgClr;
+
+                $parentContainer.querySelector('[data-img-no="' + ActiveSlide + '"]').classList.add('active');
+                $parentContainer.querySelector('[data-slide-no="' + ActiveSlide + '"]').classList.add('active');
+
+                // content slide script
+                let slideWidth = $parentContainer.querySelector('.wp-block-custom-ge-carousel-cantent').offsetWidth;
+                let contentActive = $parentContainer.querySelector('.wp-block-custom-ge-carousel-cantent.active');
+                let newActiveSlideIndexNo = getNodeindex(contentActive);
+                let selectedSlidePos = -(newActiveSlideIndexNo * slideWidth);
+
+                $parentContainer.querySelector('.carousel-items').style.transform = 'translate3d(' + selectedSlidePos + 'px, 0px, 0px)';
+
+                // image slide script
+                let imgSlideelm = $parentContainer.querySelector('.lr-image-carousel-item');
+                let imageStyle = getComputedStyle(imgSlideelm);
+                let imgSlideWidth = parseFloat(imageStyle.maxWidth)
+                let selectedImgSlidePos = -(newActiveSlideIndexNo * imgSlideWidth);
+                $parentContainer.querySelector('.image-carousel-container').style.transform = 'translate3d(' + selectedImgSlidePos + 'px, 0px, 0px)';
+
+                // dots slide script
+                let dotElm = $parentContainer.querySelector('.dot--icon');
+                let dotStyle = getComputedStyle(dotElm);
+                let dotTotalElmWidth = dotElm.offsetWidth + parseFloat(dotStyle.marginLeft) + parseFloat(dotStyle.marginRight);
+
+                if (dotElements.length > 7) {
+                    let hidedots, dotpos;
+                    if (ActiveSlideIndex < newActiveSlideIndexNo && newActiveSlideIndexNo >= 5 && newActiveSlideIndexNo < dotElements.length) {
+                        hidedots = newActiveSlideIndexNo - 4;
+
+                        if (newActiveSlideIndexNo > dotElements.length - 3) {
+                            if (newActiveSlideIndexNo !== dotElements.length - 1) {
+                                dotpos = -(dotTotalElmWidth * (hidedots - 1));
+                            }
+                            else {
+                                dotpos = -(dotTotalElmWidth * (hidedots - 2));
+                            }
+                        } else {
+                            dotpos = -(dotTotalElmWidth * hidedots);
+                        }
+                        $parentContainer.querySelector('.carousel-nav-dots').style.transform = 'translate3d(' + dotpos + 'px, 0px, 0px)';
+
+                    } else if (ActiveSlideIndex > newActiveSlideIndexNo && newActiveSlideIndexNo < dotElements.length - 6) {
+
+                        if (newActiveSlideIndexNo === dotElements.length - 7 && ActiveSlideIndex == dotElements.length - 1) {
+                            if (newActiveSlideIndexNo <= 4 && ActiveSlideIndex <= 4) {
+                                hidedots = newActiveSlideIndexNo - (newActiveSlideIndexNo - 1);
+                            }
+                            else {
+                                hidedots = newActiveSlideIndexNo - (newActiveSlideIndexNo - 1);
+                            }
+
+                        }
+                        else if (ActiveSlideIndex <= 4 || newActiveSlideIndexNo <= 4) {
+                            hidedots = 1;
+                        }
+
+                        else {
+                            hidedots = newActiveSlideIndexNo - 4;
+                        }
+                        (hidedots === 1) ? dotpos = 0 : dotpos = -(dotTotalElmWidth * hidedots);
+
+                        $parentContainer.querySelector('.carousel-nav-dots').style.transform = 'translate3d(' + dotpos + 'px, 0px, 0px)';
+
+                    }
+
+                }
+                // else {
+                //     return false
+                // }
+
+            }
+
+            hideArrowLR(this);
+
+        });
+    }
+
+    // arrow click 
+    let arrowClick = document.querySelectorAll('.carousel-nav-container .carousel-nav-arrow');
+    for (let arrowClickItem = 0; arrowClickItem < arrowClick.length; arrowClickItem++) {
+        arrowClick[arrowClickItem].addEventListener("click", function (event) {
+            const getNodeindex = elm => [...elm.parentNode.children].indexOf(elm)
+
+            let $parentContainer = this.closest('.wp-block-custom-ge-content-left-right-variant-1-with-carousel');
+            let ActiveSlide = $parentContainer.querySelector('.carousel-nav-dots .dot--icon.active').getAttribute('data-dot-no');
+            let slideActive = $parentContainer.querySelector('.wp-block-custom-ge-carousel-cantent.active');
+            let ActiveSlideIndex = getNodeindex(slideActive);
+
+            let ActiveSlideArr = ActiveSlide.split('-');
+            let slideNo = parseInt(ActiveSlideArr[1]);
+            let dotActiveBgClr = $parentContainer.querySelector('.carousel-nav-dots').getAttribute('data-active-bg');
+            let dotBgClr = $parentContainer.querySelector('.carousel-nav-dots').getAttribute('data-bg');
+
+            $parentContainer.querySelector('.carousel-nav-dots .dot--icon').style.backgroundColor = dotBgClr;
+            (this.classList.contains('carousel-next-arrow')) ? slideNo++ : slideNo--;
+
+            let updatedSlideNo = "slide-" + slideNo;
+
+            let dotElements = $parentContainer.querySelectorAll('.dot--icon');
+            dotElements.forEach(elm => {
+                elm.classList.remove('active');
+            });
+            let contentElements = $parentContainer.querySelectorAll('.wp-block-custom-ge-carousel-cantent');
+            contentElements.forEach(elm => {
+                elm.classList.remove('active');
+            });
+            let imgElements = $parentContainer.querySelectorAll('.lr-image-carousel-item');
+            imgElements.forEach(elm => {
+                elm.classList.remove('active');
+            });
+
+            let dotBGClr = $parentContainer.querySelectorAll('.carousel-nav-dots .dot--icon')
+            dotBGClr.forEach(elm => { elm.style.backgroundColor = dotBgClr;; });
+
+            $parentContainer.querySelector('[data-img-no="' + updatedSlideNo + '"]').classList.add('active');
+            $parentContainer.querySelector('[data-slide-no="' + updatedSlideNo + '"]').classList.add('active');
+            $parentContainer.querySelector('[data-dot-no="' + updatedSlideNo + '"]').classList.add('active');
+            $parentContainer.querySelector('[data-dot-no="' + updatedSlideNo + '"]').style.backgroundColor = dotActiveBgClr;;
+
+
+            let slideWidth = $parentContainer.querySelector('.wp-block-custom-ge-carousel-cantent').offsetWidth;
+            let selectedSlidePos = - (slideNo * slideWidth);
+
+            $parentContainer.querySelector('.carousel-items').style.transform = 'translate3d(' + selectedSlidePos + 'px, 0px, 0px)';
+
+            // image slide script
+            let imgSlideelm = $parentContainer.querySelector('.lr-image-carousel-item');
+            let imageStyle = getComputedStyle(imgSlideelm);
+            let imgSlideWidth = parseFloat(imageStyle.maxWidth);
+            let selectedImgSlidePos = - (slideNo * imgSlideWidth);
+            $parentContainer.querySelector('.image-carousel-container').style.transform = 'translate3d(' + selectedImgSlidePos + 'px, 0px, 0px)';
+
+            // dots slide script
+            let dotElm = $parentContainer.querySelector('.dot--icon');
+            let dotStyle = getComputedStyle(dotElm);
+            let dotTotalElmWidth = dotElm.offsetWidth + parseFloat(dotStyle.marginLeft) + parseFloat(dotStyle.marginRight);
+
+
+            if (dotElements.length > 7) {
+                let hidedots, dotpos;
+                if (slideNo > ActiveSlideIndex && slideNo >= 5 && slideNo < dotElements.length - 2) {
+                    hidedots = slideNo - 4;
+                    dotpos = - (dotTotalElmWidth * hidedots);
+                    $parentContainer.querySelector('.carousel-nav-dots').style.transform = 'translate3d(' + dotpos + 'px, 0px, 0px)';
+                }
+                else if (slideNo < ActiveSlideIndex && slideNo >= 4 && slideNo < dotElements.length - 4) {
+                    hidedots = slideNo - 4;
+                    (hidedots === 1) ? dotpos = 0 : dotpos = - (dotTotalElmWidth * hidedots);
+
+                    $parentContainer.querySelector('.carousel-nav-dots').style.transform = 'translate3d(' + dotpos + 'px, 0px, 0px)';
+                }
+
+            }
+            // else {
+            //     return false
+            // }
+
+            hideArrowLR(this);
+
+        })
+    }
+
+    // Hide & show Arrow 
+    function hideArrowLR(elem) {
+        let $thisArrow = elem.closest('.wp-block-custom-ge-content-left-right-variant-1-with-carousel');
+        let slideCount = $thisArrow.querySelectorAll('.wp-block-custom-ge-carousel-cantent');
+        // if (slideCount.length <= 1) {
+        //     let arrowHide = $thisArrow.querySelectorAll('.carousel-nav-arrow');
+        //     arrowHide.forEach(elm => { elm.style.display = 'none'; });
+        //     return
+        // }
+        if ($thisArrow.querySelector('.wp-block-custom-ge-carousel-cantent:last-child').classList.contains('active')) {
+            $thisArrow.querySelector('.carousel-nav-arrow.carousel-next-arrow').classList.add('disabled');
+        } else {
+            $thisArrow.querySelector('.carousel-nav-arrow.carousel-next-arrow').classList.remove('disabled');
+        }
+        if ($thisArrow.querySelector('.wp-block-custom-ge-carousel-cantent:first-child').classList.contains('active')) {
+            $thisArrow.querySelector('.carousel-nav-arrow.carousel-prev-arrow').classList.add('disabled');
+        } else {
+            $thisArrow.querySelector('.carousel-nav-arrow.carousel-prev-arrow').classList.remove('disabled');
+        }
+    }
+
+}

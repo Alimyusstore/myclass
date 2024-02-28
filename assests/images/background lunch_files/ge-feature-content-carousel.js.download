@@ -1,0 +1,139 @@
+// Place your frontend scripts here
+
+// import $ from "jquery";
+// Import Slick
+// import 'slick-carousel/slick/slick.min';
+
+(function ($, Drupal) {
+
+$(document).ready(function(){
+  let featureContentCarousel = $(".wp-block-custom-ge-feature-content-carousel");
+  if (featureContentCarousel.length) {
+      $(".wp-block-custom-ge-feature-content-carousel .wp-block-custom-ge-feature-content-carousel-card-image .wp-block-custom-ge-feature-content-carousel-button .content-carousel-button_link").has("a").addClass("content-carousel-button-with_link");
+
+  for(let contentCarousel = 0; contentCarousel <= 9; contentCarousel++) {
+    if ($(".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-slider-items").length) {
+      // Get count of slides
+      $(".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-slider-items").on('init reinit', function(event, slick){
+        if (slick.slideCount > 0 && !isNaN(slick.slideCount)) {
+          let contentCarouselSlideMargin = parseInt($(slick.$slides[0]).css('margin-right'));
+          let contentCarouselSlideTotalWidth = slick.$slides[0].clientWidth + contentCarouselSlideMargin;
+          let contentCarouselSlidesWidth = (contentCarouselSlideTotalWidth * slick.slideCount) - contentCarouselSlideMargin;
+
+          //check if total width of slides is less than the slider window
+          if (contentCarouselSlidesWidth < slick.$slider[0].clientWidth ) {
+            $(".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] div.content-control-carousel").addClass("content-control-arrow-hidden");
+            }
+          else {
+          $(".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] div.content-control-carousel").removeClass("content-control-arrow-hidden");
+          }
+        }
+      });
+
+      $(".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-slider-items").slick({
+        speed: 300,
+        slidesToShow: 3.25,
+        slidesToScroll: 1,
+
+        prevArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-prev-ctrl",
+        nextArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-next-ctrl",
+
+        infinite: false,
+        mobileFirst: true,
+        rows: 1,
+        variableWidth: true,
+
+        responsive: [{
+            breakpoint: 1200, //mf min(1200)
+            settings: {
+              slidesToShow: 1.25,
+              slidesToScroll: 1,
+              rows: 1,
+              prevArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-prev-ctrl",
+              nextArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-next-ctrl",
+              variableWidth: true,
+            },
+          }, {
+            breakpoint: 992,  //mf min(992)
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              rows: 1,
+              prevArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-prev-ctrl",
+              nextArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-next-ctrl",
+              variableWidth: true,
+            },
+          }, {
+            breakpoint: 767, //mf min(768)
+            settings: {
+              slidesToShow: 1.6,
+              slidesToScroll: 1,
+              rows: 1,
+              prevArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-prev-ctrl",
+              nextArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-next-ctrl",
+              variableWidth: true,
+            },
+          }, {
+            breakpoint: 576,  //mf min(576)
+            settings: {
+              slidesToShow: 1.5,
+              slidesToScroll: 1,
+              rows: 1,
+              prevArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-prev-ctrl",
+              nextArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-next-ctrl",
+              variableWidth: true,
+            },
+          }, {
+            breakpoint: 300,  //mf min(320)
+            settings: {
+              slidesToShow: 1, //1.2
+              slidesToScroll: 1,
+              rows: 1,
+              prevArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-prev-ctrl",
+              nextArrow: ".wp-block-custom-ge-feature-content-carousel[data-ge-feature-content-carousel-instance-id = '" + contentCarousel + "'] .content-carousel-next-ctrl",
+              variableWidth: true,
+            },
+          },
+
+
+          // You can unslick at a given breakpoint now by adding:
+          // settings: "unslick"
+          // instead of a settings object
+        ]
+      });
+    }
+  }
+}
+});
+
+})(jQuery, Drupal);
+
+
+  // mouse hover and mouse out style added in the GE custom button     
+  let eleFeatureCarouselBtn = document.querySelectorAll(".wp-block-custom-ge-feature-content-carousel .content-carousel-button_link");
+   eleFeatureCarouselBtn.forEach(function (index) {
+    index.addEventListener('mouseover', function (e) {
+      // Mouse Hover 
+      //console.log('script called');
+      let btnMouseHoverBackground = this.getAttribute("btn-mouse-hover-background");
+      let btnMouseHoverTextColor = this.getAttribute("btn-mouse-hover-text-color");
+      let btnMouseHoverBorderColor = this.getAttribute("btn-mouse-hover-border-color");
+
+      this.style.backgroundColor = btnMouseHoverBackground;
+      this.style.color = btnMouseHoverTextColor;
+      this.style.borderColor = btnMouseHoverBorderColor;
+    })
+
+    index.addEventListener('mouseout', function (e) {
+      //Mouse Out  
+     //console.log('script called');    
+      let btnMouseOutBackground = this.getAttribute("btn-mouse-out-background");
+      let btnMouseOutTextColor = this.getAttribute("btn-mouse-out-text-color");
+      let btnMouseOutBorderColor = this.getAttribute("btn-mouse-out-border-color");
+
+      this.style.backgroundColor = btnMouseOutBackground;
+      this.style.color = btnMouseOutTextColor;
+      this.style.borderColor = btnMouseOutBorderColor;
+    })
+
+  })

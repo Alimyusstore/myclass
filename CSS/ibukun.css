@@ -1,0 +1,64 @@
+*{
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 20px;
+}
+
+body {
+    background-color: beige;
+    height: 100vh;
+    width: 100vw;
+   
+    
+}
+
+.abc{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    width: 65vw;
+    margin-top: 40px;
+    background-color: rgba(198, 186, 186);
+    margin-left: 280px;
+    
+}
+
+section{
+    margin-top: 30px;
+    display: grid;
+    width: 42vw;
+    height: 100%;
+    grid-template: "logo logo logo" 10%
+                   "nav nav nav" 5%
+                   "head head head" 20%
+                   "side body body" 50%
+                   "footer footer footer" 5%;
+    row-gap: 5px;
+    column-gap: 20px;
+}
+
+section div:nth-of-type(1){
+    background-image: radial-gradient(blue, lightblue, darkblue);
+    grid-area: logo;
+}
+section div:nth-of-type(2){
+    background-image: radial-gradient(rgb(226, 206, 230), rgb(15, 88, 112), rgb(62, 62, 168));
+    grid-area: nav;
+}
+section div:nth-of-type(3){
+    background-image: radial-gradient(rgb(194, 105, 138), rgb(56, 95, 108), rgb(140, 140, 197));
+    grid-area: head;
+}
+section div:nth-of-type(4){
+    background-image: radial-gradient(rgb(111, 167, 136), rgb(53, 153, 186), rgb(153, 153, 230));
+    grid-area: side;
+}
+section div:nth-of-type(5){
+    background-image: radial-gradient(rgb(73, 73, 100), rgb(114, 194, 221), rgb(193, 120, 227));
+    grid-area: body;
+}
+section div:nth-of-type(6){
+    background-image: radial-gradient(rgb(148, 148, 206), rgb(203, 227, 151), rgb(91, 108, 32));
+    grid-area: footer;
+}

@@ -1,0 +1,296 @@
+/*
+Custom JS file for handling mailchimp related functionalities
+*/
+
+(function ($) {
+  Drupal.behaviors.ge_mailchimp = {
+    attach: function (context, settings) {    	  
+      $("a.atcb-item-link").attr('href', function(i,a){
+        var evtlink = decodeURIComponent(a);
+        var sysTzone = drupalSettings.ge_mailchimp_subscription.ge_mailchimp.timezone;		 
+        var etzone = $('.ir-events__field-event-timezone .field__item').html();
+
+        if(etzone != null) {
+         evtlink = evtlink.replace("e[0][timezone]=" + sysTzone, "e[0][timezone]=" + etzone);
+        }
+
+        //evtlink = encodeURIComponent(evtlink);		 
+        return evtlink;
+      });
+      if ($('#webform-submission-ge-technical-careers-issues-add-form').length > 0) {
+        $('#edit-please-select-whether-or-not-you-work-for-ge-nonge', context).click(function() {
+          var url = 'https://gecorp6.custhelp.com/app/GE/careers_guide';
+          window.open(url, '_blank');
+        });
+      }
+	  
+		$('.un-mailchimp-sub', context).click(function() {
+			$("body").addClass("modal-open");
+			$('.modal-backdrop').css('display', 'block');
+			$('#exampleModal').fadeIn("slow");
+		});
+
+      $("#ge-mailchimp-button", context).click(function() {
+	    var emailField = $('#ge-mailchimp-email').val();
+		var zipcode=$('#ge-mailchimp-zip').val();	
+		var regex = /^\d{5}$/; 
+			$("#ge-mailchimp-email").css('border','none');
+			$("#ge-mailchimp-fname").css('border','none');
+			$("#ge-mailchimp-lname").css('border','none');			
+			$("#ge-mailchimp-zip").css('border','none');
+			$("#ge-mailchimp-postal").css('border','none');
+			$("#ge-aviation").css('border','none');
+			$("#ge-healthcare").css('border','none');
+			$("#ge-energy").css('border','none');
+			$("#ge-mail-message .alert-dismissible").removeClass('alert-danger');
+			$("#ge-mail-message .alert-dismissible .response-msg").html(''); 
+				if($('#ge-mailchimp-fname').val() == '') {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter First Name.');
+				  $("#ge-mailchimp-fname").css('border','1px solid red');
+				  $("#ge-mailchimp-fname").focus();
+				}
+				else if ($('#ge-mailchimp-lname').val() == '') {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter last Name.');
+				  $("#ge-mailchimp-lname").css('border','1px solid red');
+				  $("#ge-mailchimp-lname").focus();
+				}				
+				else if ($('#ge-mailchimp-zip').val() != '' && $('#ge-mailchimp-postal').val() != '') {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter either valid US zip code or Non US postal code.');
+				  $("#ge-mailchimp-zip").css('border','1px solid red');
+				  $("#ge-mailchimp-zip").focus();
+				}
+				else if($('#ge-mailchimp-email').val() == '' || (isEmail($('#ge-mailchimp-email').val()) == false)) {
+				//clear the email field message
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter a valid Email Address.');	
+				  $("#ge-mailchimp-email").css('border','1px solid red');
+				  $("#ge-mailchimp-email").focus();	
+				}
+				else if ($('#ge-mailchimp-zip').val() == '' && $('#ge-mailchimp-postal').val() == '') {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter valid US zip code or Non US postal code.');
+				  $("#ge-mailchimp-zip").css('border','1px solid red');
+				  $("#ge-mailchimp-zip").focus();
+				}				
+				else if ($('#ge-mailchimp-zip').val() != '' && (!regex.test(zipcode))) {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter valid zip code.');
+				  $("#ge-mailchimp-zip").css('border','1px solid red');
+				  $("#ge-mailchimp-zip").focus();
+				}
+				else if (!$('input[name=MMERGE8]').is(':checked') && !$('input[name=MMERGE10]').is(':checked') && !$('input[name=MMERGE9]').is(':checked')) {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please choose one among the following business.');
+				  $("#ge-aviation").css('border','1px solid red');
+				  $("#ge-aviation").focus();
+				}
+				else {
+				  irsubscribe_mail();
+				} 			
+      });     
+	  
+	  function irsubscribe_mail(){	 
+				var basePath = drupalSettings.ge_mailchimp_subscription.ge_mailchimp.basepath;				
+		
+				 if($('input[name=MMERGE8]').is(':checked')) {
+					aviation = true;
+				  } else {
+					aviation = '';  
+				  }
+				  if($('input[name=MMERGE10]').is(':checked')) {
+					healthcare = true;
+				  } else {
+					healthcare = '';  
+				  }
+				  if($('input[name=MMERGE9]').is(':checked')) {
+					energy = true;
+				  } else {
+				    energy = ''; 
+				  }	
+				$.ajax({
+					cache: false,
+					type: 'POST',
+					data: {
+						email: $('#ge-mailchimp-email').val(),
+						fname: $('#ge-mailchimp-fname').val(),
+						lname: $('#ge-mailchimp-lname').val(),
+						zip: $('#ge-mailchimp-zip').val(),
+						MMERGE7: $('#ge-mailchimp-postal').val(),
+						MMERGE8: aviation,
+						MMERGE9: energy,
+						MMERGE10: healthcare,
+					},
+					url: basePath + 'ge-mailchimp-subscribe',
+					success: function (response, status) {
+						console.log(response);
+						var msgbox = document.getElementById("ge-mail-message");
+						//msgbox.innerHTML = response;
+						if(status === 'success') {
+						  $("#ge-mail-message").show();
+						  $("#ge-mail-message .alert-dismissible").removeClass('alert-danger');
+						  $("#ge-mail-message .alert-dismissible").addClass('alert-success');
+						  if ($('.alert-dismissible').length){
+							$("#ge-mail-message .alert-dismissible .response-msg").html(response);
+						  }
+              var stringReponse = response.includes("Thanks for your subscription");
+							$("#ge-mailchimp-fname").val('');
+							$("#ge-mailchimp-lname").val('');
+							$("#ge-mailchimp-email").val('');
+							$("#ge-mailchimp-zip").val('');
+							$("#ge-mailchimp-postal").val('');
+							$("#ge-aviation").val('');
+							$("#ge-healthcare").val('');
+							$("#ge-energy").val('');
+							$("#ge-mailchimp-email").focus();	
+							if(stringReponse == true) {
+								dataLayer.push({
+									"event": "formSubmit",
+									"eventCategory": "forms",
+									"eventAction": "newsletter sign-up",
+									"eventLabel": "sign-up successful",
+									"formName": "GE Brief",
+									"formMessage": response
+								});
+							}
+							else {
+								dataLayer.push({
+									"event": "formSubmit",
+									"eventCategory": "forms",
+									"eventAction": "newsletter sign-up",
+									"eventLabel": "sign-up failed",
+									"formName": "GE Brief",
+									"formMessage": response
+								});
+							}
+						}
+						else {
+							dataLayer.push({
+								'event': "formSubmit",
+								'eventCategory': "forms",
+								'eventAction': "newsletter sign-up",
+								'eventLabel': "sign-up failed",
+								'formName': "GE Brief",
+								'formMessage': response
+							});
+						}
+					}
+				});	 
+	        }
+			
+	 $("#ge-mailchimp-button-un", context).click(function() {
+	    var emailField = $('#ge-mailchimp-email').val();
+		var zipcode=$('#ge-mailchimp-zip').val();	
+		var regex = /^\d{5}$/; 
+			$("#ge-mailchimp-email").css('border','none');
+			$("#ge-mailchimp-fname").css('border','none');
+			$("#ge-mailchimp-lname").css('border','none');			
+			$("#ge-mailchimp-zip").css('border','none');
+			$("#ge-mail-message .alert-dismissible").removeClass('alert-danger');
+			$("#ge-mail-message .alert-dismissible .response-msg").html(''); 
+				if($('#ge-mailchimp-fname').val() == '') {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter First Name.');
+				  $("#ge-mailchimp-fname").css('border','1px solid red');
+				  $("#ge-mailchimp-fname").focus();
+				}
+				else if ($('#ge-mailchimp-lname').val() == '') {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter last Name.');
+				  $("#ge-mailchimp-lname").css('border','1px solid red');
+				  $("#ge-mailchimp-lname").focus();
+				}
+				else if($('#ge-mailchimp-email').val() == '' || (isEmail($('#ge-mailchimp-email').val()) == false)) {
+				//clear the email field message
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter a valid Email Address.');	
+				  $("#ge-mailchimp-email").css('border','1px solid red');
+				  $("#ge-mailchimp-email").focus();	
+				}				
+				else if ($('#ge-mailchimp-zip').val() != '' && (!regex.test(zipcode))) {
+				  $("#ge-mail-message").css("display", "block");
+				  $("#ge-mail-message .alert-dismissible").addClass('alert-danger');
+				  $("#ge-mail-message .alert-dismissible .response-msg").html('Please enter valid zip code.');
+				  $("#ge-mailchimp-zip").css('border','1px solid red');
+				  $("#ge-mailchimp-zip").focus();
+				}
+				else {
+				  irsubscribe_un_mail();
+				} 			
+      });
+		
+		function irsubscribe_un_mail(){	 
+				var basePath = drupalSettings.ge_mailchimp_subscription.ge_mailchimp.basepath;				
+		
+				 
+				$.ajax({
+					cache: false,
+					type: 'POST',
+					data: {
+						email: $('#ge-mailchimp-email').val(),
+						fname: $('#ge-mailchimp-fname').val(),
+						lname: $('#ge-mailchimp-lname').val(),
+						zip: $('#ge-mailchimp-zip').val()
+					},
+					url: basePath + 'ge-un-mailchimp-subscribe',
+					success: function (response, status) {
+						console.log(response);
+						var msgbox = document.getElementById("ge-mail-message");
+						//msgbox.innerHTML = response;
+						if(status === 'success') {
+						  $("#ge-mail-message").show();
+						  $("#ge-mail-message .alert-dismissible").removeClass('alert-danger');
+						  $("#ge-mail-message .alert-dismissible").addClass('alert-success');
+						  if ($('.alert-dismissible').length){
+							$("#ge-mail-message .alert-dismissible .response-msg").html(response);
+						  }
+              var stringReponse = response.includes("Thanks for your subscription");
+							$("#ge-mailchimp-fname").val('');
+							$("#ge-mailchimp-lname").val('');
+							$("#ge-mailchimp-email").val('');
+							$("#ge-mailchimp-zip").val('');
+							$("#ge-mailchimp-email").focus();	
+							if(stringReponse == true) {
+								dataLayer.push({
+									"event": "formSubmit",
+									"eventCategory": "forms",
+									"eventAction": "newsletter sign-up",
+									"eventLabel": "sign-up successful",
+									"formName": "GE Union Negotiations",
+									"formMessage": response
+								});
+							}
+							else {
+								dataLayer.push({
+									"event": "formSubmit",
+									"eventCategory": "forms",
+									"eventAction": "newsletter sign-up",
+									"eventLabel": "sign-up failed",
+									"formName": "GE Union Negotiations",
+									"formMessage": response
+								});
+							}
+						}
+					}
+				});	 
+	        }
+				
+	function isEmail(email) {
+      var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+      return regex.test(email);
+    }
+  }
+  }
+})(jQuery);

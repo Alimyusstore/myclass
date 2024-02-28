@@ -1,0 +1,99 @@
+(function ($, Drupal) {
+// script for the GE Hero video block (hero-landing-v1 block
+  $(document).ready(function () {
+/*
+    for(var i = 1; i <= 9; i++) {
+      if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "']").length) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "'] .play-button").on("click", function (ev) {
+          $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "'] .play-button").hide();
+          $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "'] #iframing" + i + ".video-player").addClass('active');
+          $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '" + i + "'] #iframing" + i + ".video-player").get(0).play();
+          ev.preventDefault();
+        });
+      }
+    }
+*/
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1'] #iframing1.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '1'] #iframing1.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2'] #iframing2.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '2'] #iframing2.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3'] #iframing3.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '3'] #iframing3.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4'] #iframing4.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '4'] #iframing4.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5'] #iframing5.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '5'] #iframing5.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6'] #iframing6.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '6'] #iframing6.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7'] #iframing7.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '7'] #iframing7.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8'] #iframing8.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '8'] #iframing8.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+    if ($(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9']").length) {
+      $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9'] .play-button").on("click", function (ev) {
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9'] h1, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9'] .article-media, .wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9'] .play-button").hide();
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9'] #iframing9.video-player").addClass('active');
+        $(".wp-block-custom-ge-hero-video[data-ge-hero-video-instance-id = '9'] #iframing9.video-player").get(0).play();
+        ev.preventDefault();
+      });
+    }
+
+  });
+})(jQuery, Drupal);

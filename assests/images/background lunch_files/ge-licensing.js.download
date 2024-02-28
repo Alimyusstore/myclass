@@ -1,0 +1,210 @@
+// Place your frontend scripts here
+
+//import $ from "jquery";
+// Import Slick
+//import 'slick-carousel/slick/slick.min';
+(function ($, Drupal) {
+
+  $(document).ready(function(){
+
+    $("a.wp-block-button__link:contains('CONTACT LICENSING TEAM')").parent(".wp-block-button.primary").on("click", function() {
+      openNav();
+    });  
+    
+    /* Set the width of the side navigation */
+    function openNav() {
+      $("#stickySidenav").addClass("active");
+    }
+
+    /* Set the width of the side navigation to 0 */
+    function closeNav() {
+      $("#stickySidenav").removeClass("active");
+    }
+				//Add Iframe id and alter iframe src and data-src
+		if($('.licensing-video').length) {
+			$('.licensing-video iframe').attr('id','licensing-yt');
+			var frameurl_orig = $('.wp-block-embed__wrapper').find('iframe#licensing-yt').attr('src');
+			if(frameurl_orig != undefined) {
+				var processedUrl = frameurl_orig.replace('?rel=0','') + "?enablejsapi=1";
+				$('.licensing-video iframe').attr('src',processedUrl);
+				$('.licensing-video iframe').attr('data-src',processedUrl);
+			
+				//Iframe on click function
+				//$('.wp-block-embed__wrapper iframe#licensing-yt').iframeTracker({
+					//blurCallback: function(){
+						// Do something when iframe is clicked (like firing an XHR request)
+						var frameurl = $('.wp-block-embed__wrapper').find('iframe#licensing-yt').attr('src');
+						loadPlayer(frameurl);
+					//}
+				//});
+			}
+			// Youtube Video percentage calc, Video progress, status tracking  
+			var player; var timer; var timeSpent = []; 
+			var timer25; var timer50; var timer75; 
+			var timestamp; var timestamp25; var timestamp50; var timestamp75;
+			var remainingTime; var remainingTime25; var remainingTime50; var remainingTime75;
+			var vidduration; var currentTime; var ytTitle;
+			function loadPlayer(frameurl) {
+				if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+					var tag = document.createElement('script');
+					tag.src = "https://www.youtube.com/iframe_api";
+					var firstScriptTag = document.getElementsByTagName('script')[0];
+					firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);  		  
+					window.onYouTubePlayerAPIReady = function() {
+						onYouTubePlayer(frameurl);
+					};
+				} else {		
+					clearTimers();								  	
+					onYouTubePlayer(frameurl);			
+				}
+			}
+
+			function onYouTubePlayer(frameurl) {
+				if($('#licensing-yt').length) {
+					var yturl = $('#licensing-yt').attr('src');
+					var ytid = matchYoutubeUrl(yturl);
+					player = new YT.Player('licensing-yt', {
+						videoId: ytid,			  
+						events: {
+							'onReady': onPlayerReady,	
+							'onStateChange': onPlayerStateChange,			 
+						}
+					});
+				}
+			}
+
+			function matchYoutubeUrl(url){
+				var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+				return (url.match(p)) ? RegExp.$1 : false ;
+			}
+
+			function onPlayerReady(event) { 
+				//event.target.playVideo();
+			}
+
+			function onPlayerStateChange(event) {
+				var frameid = player.id;
+				if(ytTitle == undefined) {
+					ytTitle = player.playerInfo.videoData['title'];
+				}
+				if (event.data == 1) {          		   
+					if (typeof player.getDuration === "function"){
+						vidduration = player.getDuration() ? player.getDuration() : player.playerInfo.duration;
+					} else {		
+						vidduration = player.playerInfo.duration;
+					}
+					timestamp = Math.floor(vidduration);
+					timestamp25 = timestamp * 0.25;
+					timestamp50 = timestamp * 0.5;
+					timestamp75 = timestamp * 0.75;
+					if (typeof player.getCurrentTime === "function"){
+						currentTime = player.getCurrentTime() ? player.getCurrentTime() : player.playerInfo.currentTime;
+					} else {
+						currentTime = player.playerInfo.currentTime;
+					}
+					remainingTime = timestamp - currentTime;
+					remainingTime25 = timestamp25 - currentTime;
+					remainingTime50 = timestamp50 - currentTime;
+					remainingTime75 = timestamp75 - currentTime;
+					videoanalytics('Progress',frameid);
+					record(frameid);
+				}else if (event.data == 2) {
+					videoanalytics('Paused',frameid);			  			
+				}else if (event.data == 0) {
+					videoanalytics('Complete',frameid);			
+				}else if (event.data == 3) {
+					videoanalytics('Buffering',frameid);			
+				}else {
+					videoanalytics('Not started',frameid);
+				}
+			}
+
+			// Track the video watched percentage
+			function record(frameid){
+				if (currentTime <= timestamp25) {
+					timer25 = setTimeout(function() {           	 
+						percentagewatched('25%',frameid);
+					}, remainingTime25 * 1000);		      	 
+				}
+				if (currentTime <= timestamp50) {
+					timer50 = setTimeout(function() {
+						percentagewatched('50%',frameid);
+					}, remainingTime50 * 1000);
+				}
+				if (currentTime <= timestamp75) {
+					timer75 = setTimeout(function() {
+						percentagewatched('75%',frameid);
+					}, remainingTime75 * 1000);
+				}
+			}
+
+			// Clearing the timers 
+			function clearTimers() {
+				clearTimeout(timer);
+				clearTimeout(timer25);
+				clearTimeout(timer50);
+				clearTimeout(timer75);
+				timestamp=0;
+				timestamp25=0;
+				timestamp50=0;
+				timestamp75=0;
+			}
+
+			// GTM Tracking for video status - progress, pause, complete  
+			function videoanalytics(videostatus,frameid) {
+				if($('#licensing-yt').length) {
+					var videotitles = ytTitle;
+					var videoURLs = $('#licensing-yt').attr('src');
+				}
+				if(videotitles != undefined) {
+					var stripedtitle = videotitles.replace(/<[^>]+>/g, '');
+					$.trim(stripedtitle);
+					dataLayer.push({
+						'event': 'videoPlay',
+						'eventCategory': 'content',
+						'eventAction': 'video engagement',
+						'videoProvider': 'Youtube',
+						'videoStatus': videostatus,
+						'videoURL': videoURLs,
+						'videoTitle': stripedtitle
+					});
+				}
+			}
+
+			// GTM Tracking for video played percentage   
+			function percentagewatched(videoPercent,frameid) {
+
+				if($('#licensing-yt').length) { 
+					var videotitles = ytTitle;
+					var videoURLs = $('#licensing-yt').attr('src');
+				}
+				if(videotitles != undefined) {
+					var stripedtitle = videotitles.replace(/<[^>]+>/g, '');
+					$.trim(stripedtitle);
+					dataLayer.push({
+						'event': 'videoPlay',
+						'eventCategory': 'content',
+						'eventAction': 'video engagement',
+						'videoProvider': 'Youtube',
+						'videoPercent': videoPercent, 
+						'videoURL': videoURLs,
+						'videoTitle': stripedtitle 		
+					});
+				}
+			}
+		}
+		if($('#stickySidenav.ge-salesforce').length > 0) {
+			$( "#salesform" ).submit(function(event) {
+				dataLayer.push({
+					'event': "formSubmit",
+					'eventCategory': "forms",
+					'eventAction': "contact us form interaction",
+					'eventLabel': "successful form submit",
+					'formName': "GE - Licensing Contact us",
+					'formMessage': "Thank you"
+				});
+			});
+		}
+  });
+
+})(jQuery, Drupal);

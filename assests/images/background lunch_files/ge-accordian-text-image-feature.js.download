@@ -1,0 +1,34 @@
+(function ($, Drupal) {
+  if (document.querySelectorAll(`.wp-block-custom-ge-accordian-text-image-feature`).length != 0) {
+    const totalBlocks = document.querySelectorAll(`.wp-block-custom-ge-accordian-text-image-feature`);
+    for (let i = 1; i <= totalBlocks.length; i++) {
+      const sectionSelector = document.querySelector(`.wp-block-custom-ge-accordian-text-image-feature[instance-id='${i}']`);
+      const accordionTab = sectionSelector.querySelectorAll(`.wp-block-custom-ge-add-accordian-section .accordionTab`);
+      if (accordionTab.length !== 0) {
+        const accordianContent = sectionSelector.querySelector(".accordian-content")
+        accordionTab[0].classList.add('active');
+        const firstAccordion = accordionTab[0].nextElementSibling;
+        firstAccordion.style.maxHeight = firstAccordion.scrollHeight + 'px';
+        accordianContent.style.minHeight = firstAccordion.querySelector('picture').scrollHeight + 30 + 'px';
+        for (let j = 0; j < accordionTab.length; j++) {
+          accordionTab[j].addEventListener('click', function () {
+            for (let item of accordionTab) {
+              item.classList.remove("active");
+              item.nextElementSibling.style.maxHeight = null;
+            };
+            this.classList.add('active');
+            const panelTab = this.nextElementSibling;
+            if (panelTab.style.maxHeight) {
+              panelTab.style.maxHeight = null;
+            }
+            else {
+              panelTab.style.maxHeight = panelTab.scrollHeight + 'px';
+            }
+            accordianContent.style.minHeight = this.nextElementSibling.querySelector('picture').scrollHeight + 30 + 'px';
+          });
+        }
+      }
+    }
+  }
+})(jQuery, Drupal);
+

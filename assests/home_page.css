@@ -1,0 +1,81 @@
+body{
+    background-color: #000000;
+    color: #ffffff;
+    margin: 2% 7%;
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav>div:first-child {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: x-large;
+    flex-grow: 1; /* This will make the first child take the remaining space */
+    font-weight: 900;
+}
+
+a>button{
+    background-color: #c51333;
+    color: white;
+    padding: 10px 20px; 
+    font-size: 32px; 
+    border-radius: 10px;
+    margin: auto 0;
+}
+
+section {
+    display: flex;
+}
+
+section>div:first-child {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 20px;
+}
+
+section>div:last-child {
+    width: 50%;
+}
+
+h1 {
+    font-size: 400%;
+    margin: auto 0;
+}
+
+section>div:nth-child(1) img {
+    border-radius: 50%;
+    border: 5px solid #c51333;
+    margin: auto 0;
+}  
+
+section>div:nth-child(1)>div:nth-child(4) {
+    display: flex;
+    align-items: center;
+}  
+
+section>div:nth-child(1)>div:nth-child(1) {
+    color: #c51333;
+} 
+
+section>div:first-child>div:last-child {
+    margin-top: 40px; /* Adjust the value as needed */
+}
+
+nav>div:first-child :hover{
+    color: #c51333;
+    cursor: pointer;
+}
+
+a>button:hover {
+    background-color: #f76680;
+    cursor: pointer;
+}

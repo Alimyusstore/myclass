@@ -1,0 +1,59 @@
+
+// Place your frontend scripts here
+// Parallax Animaton variant 1
+(function ($, Drupal) {
+$(window).scroll(function () {
+
+  for (var i = 0; i <= 9; i++) {
+    var gePrallaxV1Top = $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .ge-prallax-v1-slide1");
+    if (gePrallaxV1Top.length) {
+      var gePrallaxV1TopPosition = gePrallaxV1Top.offset().top;
+      var gePrallaxV1ScrollTop = $(window).scrollTop() + 141;
+      var gePrallaxV1ScrollTopSmallDevice = $(window).scrollTop() + 300;
+      if ($(window).width() >= 769 && gePrallaxV1ScrollTop >= gePrallaxV1TopPosition) {
+        $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .ge-prallax-v1-slide1").css({
+          'opacity': 0,
+          'transition': 'all 0.9s ease',
+        });
+      }
+
+      else if ($(window).width() <= 768 && gePrallaxV1ScrollTopSmallDevice >= gePrallaxV1TopPosition) {
+        $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .ge-prallax-v1-slide1").css({
+          'opacity': 0,
+          'transition': 'all 0.9s ease',
+        });
+      }
+
+      else {
+        $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .ge-prallax-v1-slide1").css({
+          'opacity': 0.93,
+          'transition': 'all 0.9s ease',
+        });
+      }
+    }
+
+    // Second content slide
+    var gePrallaxV1SecSlide = $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .ge-prallax-v1-slide2");
+    if (gePrallaxV1SecSlide.length) {
+      var gePrallaxV1SecSlideTop = gePrallaxV1SecSlide.offset().top + 300 ;
+      var gePrallaxV1SecSlideHeight = $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .ge-prallax-v1-slide2").outerHeight();
+      if ($(window).scrollTop() >= gePrallaxV1SecSlideTop + gePrallaxV1SecSlideHeight - window.innerHeight) {
+        //console.log("second parallax section");
+        $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .gePrallaxV1SecSlide").css({
+          'opacity': 1,
+          'transition': 'all 0.9s ease',
+        });
+      }
+      else {
+        $(".wp-block-custom-ge-parallax[data-ge-parallax-instance-id = '" + i + "'] .gePrallaxV1SecSlide").css({
+          'opacity': 0,
+          'transition': 'all 0.9s ease',
+        });
+      }
+    }
+  }
+});
+
+
+  // end
+})(jQuery, Drupal);

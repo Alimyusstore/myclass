@@ -1,0 +1,143 @@
+/*
+Custom JS file for handling mailchimp related functionalities
+*/
+
+(function ($) {
+  Drupal.behaviors.ge_add_to_calendar = {
+    attach: function (context, settings) { 
+			$(document).ready(function (event) {
+				if($(".ge-add-calendar-wrapper")) {
+					$(".ge-pop-calendar", context).on("click", function (event) {
+						var popup = $(this).siblings(".ge-add-to-calendar");
+            event.stopPropagation();
+						popup.toggleClass("show");
+					});
+					$(document, context).click(function() {
+            var popup = $(".ge-pop-calendar").siblings(".ge-add-to-calendar");
+            if(popup.hasClass("show")) {
+              popup.removeClass("show");
+            }
+          });
+					$(".ge-outlook", context).on("click", function (event) {
+						var basePath = drupalSettings.ge_base_path.basepath;
+						var title = $(this).parents("#ge-add-to-calendar").attr('data-title');
+						var dates = $(this).parents("#ge-add-to-calendar").attr('data-dates');
+						var links = $(this).parents("#ge-add-to-calendar").attr('data-link');
+						var body = $(this).parents("#ge-add-to-calendar").attr('data-body');
+						var split_dates = dates.split(" , ");
+
+						$.ajax({
+							cache: false,
+							type: 'POST',
+							data: {
+								summary: title,
+								datestart: split_dates['0'],
+								dateend: split_dates['1'],
+								urlevent: links,
+								body: body,
+							},
+							url: basePath + "ge-download-ics",
+							success: function (response, status) {
+								var link = document.createElement("a");
+								link.href = 'data:text/calendar;charset=utf8,' + escape(response);
+								link.download = "ge-event.ics";
+								link.click();
+							}
+						});
+						var popup = $(this).parents(".ge-add-to-calendar");
+            event.stopPropagation();
+						popup.toggleClass("show");
+					});
+
+					$(".ge-icalendar", context).on("click", function (event) {
+						var basePath = drupalSettings.ge_base_path.basepath;
+						var title = $(this).parents("#ge-add-to-calendar").attr('data-title');
+						var dates = $(this).parents("#ge-add-to-calendar").attr('data-dates');
+						var links = $(this).parents("#ge-add-to-calendar").attr('data-link');
+						var body = $(this).parents("#ge-add-to-calendar").attr('data-body');
+						var split_dates = dates.split(" , ");
+
+						$.ajax({
+							cache: false,
+							type: 'POST',
+							data: {
+								summary: title,
+								datestart: split_dates['0'],
+								dateend: split_dates['1'],
+								urlevent: links,
+								body: body,
+							},
+							url: basePath + "ge-download-ics",
+							success: function (response, status) {
+								var link = document.createElement("a");
+								link.href = 'data:text/calendar;charset=utf8,' + escape(response);
+								link.download = "ge-event.ics";
+								link.click();
+							}
+						});
+						var popup = $(this).parents(".ge-add-to-calendar");
+            event.stopPropagation();
+						popup.toggleClass("show");
+					});
+
+					$(".ge-add-to-google", context).on("click", function (event) {
+						var basePath = drupalSettings.ge_base_path.basepath;
+						var title = $(this).parents("#ge-add-to-calendar").attr('data-title');
+						var dates = $(this).parents("#ge-add-to-calendar").attr('data-dates');
+						var links = $(this).parents("#ge-add-to-calendar").attr('data-link');
+						var body = $(this).parents("#ge-add-to-calendar").attr('data-body');
+						var split_dates = dates.split(" , ");
+
+						$.ajax({
+							cache: false,
+							type: 'POST',
+							data: {
+								summary: title,
+								datestart: split_dates['0'],
+								dateend: split_dates['1'],
+								urlevent: links,
+								body: body,
+							},
+							url: basePath + "ge-google-calendar",
+							success: function (response, status) {
+								window.open(response);
+							}
+						});
+						var popup = $(this).parents(".ge-add-to-calendar");
+            event.stopPropagation();
+						popup.toggleClass("show");
+					});
+					
+					$(".ge-add-to-yahoo", context).on("click", function (event) {
+						var basePath = drupalSettings.ge_base_path.basepath;
+						var title = $(this).parents("#ge-add-to-calendar").attr('data-title');
+						var dates = $(this).parents("#ge-add-to-calendar").attr('data-dates');
+						var links = $(this).parents("#ge-add-to-calendar").attr('data-link');
+						var body = $(this).parents("#ge-add-to-calendar").attr('data-body');
+						var split_dates = dates.split(" , ");
+
+						$.ajax({
+							cache: false,
+							type: 'POST',
+							data: {
+								summary: title,
+								datestart: split_dates['0'],
+								dateend: split_dates['1'],
+								urlevent: links,
+								body: body,
+							},
+							url: basePath + "ge-yahoo-calendar",
+							success: function (response, status) {
+								window.open(response);
+							}
+						});
+						var popup = $(this).parents(".ge-add-to-calendar");
+            event.stopPropagation();
+						popup.toggleClass("show");
+					});
+				}
+			});
+    }
+  };
+
+})(jQuery);

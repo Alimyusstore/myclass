@@ -1,0 +1,36 @@
+
+// Place your frontend scripts here
+
+var fullWidthAccordionElement = document.querySelectorAll(".wp-block-custom-ge-full-width-section-dropdown-content");
+if (fullWidthAccordionElement.length) {
+  let fullWidthAccordionTitle = document.querySelectorAll(".accordion-container-accordion-item");
+  let fullWidthAccordionItem;
+  let activeAccordionSet = false
+  for (fullWidthAccordionItem = 0; fullWidthAccordionItem < fullWidthAccordionTitle.length; fullWidthAccordionItem++) {
+    fullWidthAccordionTitle[fullWidthAccordionItem].addEventListener("click", function (e) {
+
+      let sectionParentContainerAccordion = this.closest(".wp-block-custom-ge-full-width-section-dropdown-content");
+      if (this.classList.contains('active')) {
+        activeAccordionSet = true;
+      }
+      if (sectionParentContainerAccordion.querySelectorAll(".wp-block-custom-ge-accordion-container .accordion-container-accordion-item.active").length) {
+        sectionParentContainerAccordion.querySelector(".wp-block-custom-ge-accordion-container .accordion-container-accordion-item.active").classList.remove('active');
+        let parentContainerChildElement = sectionParentContainerAccordion.querySelectorAll(".wp-block-custom-ge-accordion-container .accordion-container-accordion-item");
+        for (let childElementAccordion = 0; childElementAccordion < parentContainerChildElement.length; childElementAccordion++) {
+          parentContainerChildElement[childElementAccordion].nextElementSibling.style.height = null;
+        }
+      }
+      let accordionContainerAccordionBody = this.nextElementSibling;
+      if (activeAccordionSet) {
+        this.classList.remove('active');
+        accordionContainerAccordionBody.style.height = null;
+      } else {
+        this.classList.add('active');
+        accordionContainerAccordionBody.style.height = accordionContainerAccordionBody.scrollHeight + "px";
+      }
+      activeAccordionSet = false;
+    });
+  }
+
+
+}

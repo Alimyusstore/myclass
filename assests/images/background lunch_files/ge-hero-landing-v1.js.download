@@ -1,0 +1,31 @@
+(function ($, Drupal) {
+  
+  // script for the GE youtube video block (hero-landing-v1 block 
+  $(document).ready(function() {
+    $('.wp-block-custom-ge-hero-landing-v1 .play-button').on('click', function(ev) { 
+      $(".wp-block-custom-ge-hero-landing-v1 .iframing").trigger('click');
+      $(".wp-block-custom-ge-hero-landing-v1 .iframing").addClass('active');
+      $(".wp-block-custom-ge-hero-landing-v1 .iframing")[0].src += "&autoplay=1";
+      $(".wp-block-custom-ge-hero-landing-v1 h1").hide();
+      
+      // video traking start
+      var videoURLs = $('.wp-block-custom-ge-hero-landing-v1 .video-player iframe').attr('src');
+      var videotitles = $(this).parents('.wp-block-custom-ge-hero-landing-v1').find('h1').html();
+      var stripedtitle = videotitles.replace(/<[^>]+>/g, '');
+      $.trim(stripedtitle);
+      dataLayer.push({
+        'event': 'videoPlay',
+        'eventCategory': 'content',
+        'eventAction': 'video engagement',
+        'videoProvider': 'Youtube',
+        'videoStatus': 'Open',
+        'videoURL': videoURLs,
+        'videoTitle': stripedtitle
+      });
+      // end 
+    
+      ev.preventDefault(); 
+
+    });
+  });
+})(jQuery, Drupal);

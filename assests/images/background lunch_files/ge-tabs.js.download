@@ -1,0 +1,57 @@
+window.addEventListener("load", function() {
+  // store tabs variable
+  var theTabs = document.querySelectorAll(".wp-block-custom-ge-tabs ul.nav-tabs > li");
+
+  function theTabClicks(tabClickEvent) {
+      var clickedTab = tabClickEvent.currentTarget;
+      var tabParent = tabClickEvent.currentTarget.parentNode.parentNode.parentNode;
+      var theTabs = tabParent.querySelectorAll(".wp-block-custom-ge-tabs ul.nav-tabs > li");
+      for (var i = 0; i < theTabs.length; i++) {
+          theTabs[i].classList.remove("active");
+      }
+      
+      clickedTab.classList.add("active");
+      tabClickEvent.preventDefault();
+      var contentPanes = tabParent.querySelectorAll(".tab-pane");
+      for (i = 0; i < contentPanes.length; i++) {
+          contentPanes[i].classList.remove("active");
+      }
+      var anchorReference = tabClickEvent.target;
+      var activePaneId = anchorReference.getAttribute("href");
+      var activePane = tabParent.querySelector(activePaneId);
+      activePane.classList.add("active");
+  }
+  for (i = 0; i < theTabs.length; i++) {
+      theTabs[i].addEventListener("click", theTabClicks)
+  }
+});
+
+(function ($, Drupal) {
+// for video iframe
+$(document).ready(function () {
+  $('.wp-block-custom-ge-tab-contents-v1 .play-button').on('click', function (ev) {
+    var iframeID = $(this).parents('.wp-block-custom-ge-tab-contents-v1').find('iframe').attr('id');
+    $(".wp-block-custom-ge-tab-contents-v1 #"+ iframeID).addClass('active');
+    // $(this).parents('.wp-block-custom-ge-tab-contents-v1').find('h1').hide();
+    $(this).parents('.wp-block-custom-ge-tab-contents-v1').find('.play-button').hide();
+    $(this).parents('.wp-block-custom-ge-tab-contents-v1').find('.customBackground').hide();    
+    $(".wp-block-custom-ge-tab-contents-v1 #"+ iframeID)[0].src += "&autoplay=true";
+    $(".wp-block-custom-ge-tab-contents-v1 #"+ iframeID).trigger('click');    
+    ev.preventDefault();
+  });
+  
+   //test video block
+    $('.wp-block-custom-ge-tab-contents-v3 .play-button').on('click', function (ev) {
+      var iframeVideoId = $(this).parents('.wp-block-custom-ge-tab-contents-v3').find('iframe').attr('id');
+      $(".wp-block-custom-ge-tab-contents-v3 #"+ iframeVideoId).addClass('active');
+      // $(this).parents('.wp-block-custom-ge-tab-contents-v3').find('.video-text-wrapper').hide();
+      $(this).parents('.wp-block-custom-ge-tab-contents-v3').find('.play-button, .customBackground, .video-text-wrapper, .text-wrapper').hide();
+      // $(this).parents('.wp-block-custom-ge-tab-contents-v3').find('.customBackground').hide();    
+      $(".wp-block-custom-ge-tab-contents-v3 #"+ iframeVideoId)[0].src += "&autoplay=true";
+      $(".wp-block-custom-ge-tab-contents-v3 #"+ iframeVideoId).trigger('click');     
+      ev.preventDefault();
+    });
+});
+//
+})(jQuery, Drupal);
+

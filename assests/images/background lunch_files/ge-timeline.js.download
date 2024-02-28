@@ -1,0 +1,161 @@
+// Timeline Script
+(function ($, Drupal) {
+    // Timeline Script
+    if ($('.wp-block-custom-ge-timeline').length) {
+        $(window).on("resize", function (e) {
+            $('.wp-block-custom-ge-timeline').each(function () {
+                timeLineSlider($(this));
+                getMarginLeft($(this));
+                hideArrow($(this))
+            });
+
+        });
+
+        $('.wp-block-custom-ge-timeline').each(function () {
+            timeLineSlider($(this));
+            getMarginLeft($(this));
+            hideArrow($(this))
+        });
+
+        var dateDivdefaultPosition, sliderDivWidth, dateDivWidth, sliderContainerWidth;
+        var onclickValue = false
+
+        function timeLineSlider(element) {
+            var $this = element;
+            // slide date
+            var dateDiv = $this.find('.wp-block-custom-ge-timeline-date');
+            var dateDivLength = dateDiv.length;
+            dateDivWidth = dateDiv.outerWidth();
+            var dateDivContainerWidth = $this.find('.wp-block-custom-ge-timeline-date-container').outerWidth();
+            var dateContainerWidth = dateDivLength * dateDivWidth;
+            dateDivdefaultPosition = dateDivContainerWidth / 2 - dateDivWidth / 2;
+            var currentIndex1 = $this.find('.wp-block-custom-ge-timeline-date.active').prevAll().length;
+            if (!onclickValue) {
+                $this.find('.timeline-date-content-block').css({ 'width': dateContainerWidth, 'margin-left': dateDivContainerWidth / 2 - dateDivWidth / 2 });
+                $this.find('.timeline-date-content-block').animate({ 'marginLeft': dateDivdefaultPosition - (dateDivWidth * currentIndex1) }, { queue: false });
+            }
+
+            // default active slide 
+            var defaultACtiveDate = $this.find('.wp-block-custom-ge-timeline-date.active').attr('date-id');
+            $this.find('.wp-block-custom-ge-timeline-content[data-slide=' + defaultACtiveDate + ']').addClass('active');
+
+            // slider div
+            var sliderDiv = $this.find('.wp-block-custom-ge-timeline-content');
+            var sliderDivLength = sliderDiv.length;
+            sliderDivWidth = sliderDiv.outerWidth();
+            sliderContainerWidth = sliderDivLength * sliderDivWidth;
+
+
+            return (dateDivdefaultPosition, sliderDivWidth, dateDivWidth, sliderContainerWidth)
+            // hideArrow();
+        }
+        // get index no of div
+        function getMarginLeft(el) {
+            var $thisLeft = el;
+            // var divIndexNo = 0;
+            var activeItem = $thisLeft.find('.wp-block-custom-ge-timeline-date.active');
+            divIndexNo = $thisLeft.find('.wp-block-custom-ge-timeline-date').index(activeItem);
+            var contentMarginLeft = '-' + divIndexNo * sliderDivWidth + 'px';
+            $thisLeft.find('.wp-block-custom-ge-timeline-content-container').css({ 'width': sliderContainerWidth })
+            $thisLeft.find('.wp-block-custom-ge-timeline-content-container').animate({ 'marginLeft': contentMarginLeft }, { queue: false, duration: 'fast' });
+            // $thisLeft.find('.wp-block-custom-ge-timeline-content-container').animate({ 'marginLeft': dateDivdefaultPosition - (dateDivWidth * divIndexNo) }, { queue: false, duration: 'fast' });
+        }
+        // Hide & show Arrow 
+        function hideArrow(elem) {
+            var $thisArrow = elem;
+            if ($thisArrow.find('.wp-block-custom-ge-timeline-content').length <= 1) {
+                $thisArrow.find('.timeline-arrow').fadeOut('fast');
+                return
+            }
+            if ($thisArrow.find('.wp-block-custom-ge-timeline-content').last().hasClass('active')) {
+                $thisArrow.find('.timeline-arrow.next-arrow').fadeOut('fast');
+            } else {
+                $thisArrow.find('.timeline-arrow.next-arrow').fadeIn();
+            }
+            if ($thisArrow.find('.wp-block-custom-ge-timeline-content').first().hasClass('active')) {
+                $thisArrow.find('.timeline-arrow.prev-arrow').fadeOut('fast');
+            }
+            else {
+                $thisArrow.find('.timeline-arrow.prev-arrow').fadeIn();
+            }
+        }
+
+
+
+
+        //Timeline date click script
+        $('.wp-block-custom-ge-timeline-date').on('click', function () {
+            onclickValue = true;
+            var thisParentID = '#' + $(this).parents('.wp-block-custom-ge-timeline').attr('id');
+            timeLineSlider($(thisParentID));
+            var $dateParentContainer = $(this).parents('.timeline-container');
+            var dateID = $(this).attr('date-id');
+            var slideID = $dateParentContainer.find('.wp-block-custom-ge-timeline-content[data-slide=' + dateID + ']');
+            var currentIndex = $(this).prevAll().length;
+
+            $(this).parents('.timeline-date-content-block').animate({ 'marginLeft': dateDivdefaultPosition - (dateDivWidth * currentIndex) }, { queue: false });
+
+            if ($(this).hasClass('active')) {
+                return;
+            } else {
+                $dateParentContainer.find('.wp-block-custom-ge-timeline-content').removeClass('active');
+                $dateParentContainer.find('.wp-block-custom-ge-timeline-date').removeClass('active');
+            }
+
+            $(this).addClass('active');
+            slideID.addClass('active');
+
+            getMarginLeft($(thisParentID));
+            hideArrow($(thisParentID))
+
+            // getMarginLeft();
+            // hideArrow();
+
+            $dateParentContainer.find('.wp-block-custom-ge-timeline-content').animate({ 'opacity': 0.2 }, { queue: false, duration: 'fast' });
+            $dateParentContainer.find('.wp-block-custom-ge-timeline-content.active').fadeTo('fast', 1);
+
+
+        })
+
+        // Timeline arrow click script
+        $('.timeline-arrow').on('click', function () {
+            onclickValue = true;
+            var thisArrowParentID = '#' + $(this).parents('.wp-block-custom-ge-timeline').attr('id');
+            timeLineSlider($(thisArrowParentID));
+            var $arrowParentContainer = $(this).parents('.timeline-container');
+            var activeItem1 = $arrowParentContainer.find('.wp-block-custom-ge-timeline-date.active');
+            var divIndexNo1 = $arrowParentContainer.find('.wp-block-custom-ge-timeline-date').index(activeItem1);
+            var contentMarginLeft1;
+            var updatedIndexNo;
+
+
+            if ($(this).hasClass('next-arrow')) {
+                updatedIndexNo = divIndexNo1 + 1;
+                contentMarginLeft1 = '-' + updatedIndexNo * sliderDivWidth + 'px';
+            }
+            else {
+                updatedIndexNo = divIndexNo1 - 1;
+                contentMarginLeft1 = '-' + updatedIndexNo * sliderDivWidth + 'px';
+            }
+
+
+
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-content').removeClass('active');
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-date').removeClass('active');
+
+
+
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-content').eq(updatedIndexNo).addClass('active');
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-date').eq(updatedIndexNo).addClass('active');
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-content-container').css({ 'width': sliderContainerWidth })
+
+            hideArrow($(thisArrowParentID));
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-content-container').animate({ 'marginLeft': contentMarginLeft1 }, { queue: false, duration: 'slow' });
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-date').parents('.timeline-date-content-block').animate({ 'marginLeft': dateDivdefaultPosition - (dateDivWidth * updatedIndexNo) }, { queue: false });
+
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-content').animate({ 'opacity': 0.2 }, { queue: false, duration: 'slow' });
+            $arrowParentContainer.find('.wp-block-custom-ge-timeline-content.active').fadeTo('slow', 1);
+
+        })
+    }
+})(jQuery, Drupal);

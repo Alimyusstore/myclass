@@ -1,0 +1,86 @@
+// Place your frontend scripts here
+(function ($, Drupal) {
+     
+        $(document).ready(function() {
+          $(".wp-block-custom-ge-content-left-right-image[instance-id = '1'] .play-button").on('click', function(ev) { 
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '1'] #iframing").trigger('click');
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '1'] #iframing").addClass('active');
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '1'] #iframing")[0].src += "&autoplay=1";
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '1'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '1'] .play-button").hide();               
+            ev.preventDefault();       
+          });      
+        });
+        $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '2'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '2'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '2'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '2'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '2'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '2'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+          $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '3'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '3'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '3'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '3'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '3'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '3'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+          $(document).ready(function() {
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '4'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '4'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '4'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '4'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '4'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '4'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+          $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '5'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '5'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '5'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '5'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '5'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '5'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+          $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '6'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '6'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '6'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '6'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '6'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '6'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+          $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '7'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '7'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '7'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '7'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '7'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '7'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+          $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '8'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '8'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '8'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '8'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '8'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '8'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });  
+          $(document).ready(function() {
+            $(".wp-block-custom-ge-content-left-right-image[instance-id = '9'] .play-button").on('click', function(ev) { 
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '9'] #iframing").trigger('click');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '9'] #iframing").addClass('active');
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '9'] #iframing")[0].src += "&autoplay=1";
+              $(".wp-block-custom-ge-content-left-right-image[instance-id = '9'] .customBackground, .wp-block-custom-ge-content-left-right-image[instance-id = '9'] .play-button").hide();               
+              ev.preventDefault();       
+            });      
+          });
+		  
+})(jQuery, Drupal);

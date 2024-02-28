@@ -1,0 +1,107 @@
+//import $ from "jquery";
+(function ($, Drupal) {
+    $(document).ready(function() {
+        $(".hotspot").on('click',function(){
+            var hotspotAttr = $(this).attr('data-hotspot');
+            var parentID = '#'+ $(this).parents('.wp-block-custom-ge-image-block-with-hotspot').attr('id');
+            
+            if($(parentID).find(".img-hotspot-content.img-hotspot-content-visible[data-hotspot="+hotspotAttr+"]").length){
+                $(parentID).find(".img-hotspot-content[data-hotspot="+hotspotAttr+"]").removeClass('img-hotspot-content-visible');
+                $(this).removeClass('show-content');
+            }
+            else{
+                $(parentID).find(".img-hotspot-content").removeClass('img-hotspot-content-visible');
+                $(parentID).find(".hotspot").removeClass('show-content');
+                var height =  $(this).height();
+                var width = $(parentID).find(".img-hotspot-content[data-hotspot="+hotspotAttr+"]").outerWidth() / 2 - $(this).outerWidth() / 2;
+                var left = $(this).position().left - width - 1;
+                var hotspotHT = $(parentID).find(".img-hotspot-content[data-hotspot="+hotspotAttr+"]").outerHeight()/2;
+                var right = "unset" ;
+                var top ;
+
+                if(window.outerWidth<992){
+                   var rightSidePosition=  $(this).parents('.img-wrapper').width() - $(this).position().left ;
+                   top = $(this).position().top + height + 74 ;
+                    if($(this).position().left<95){
+                        left = $(this).position().left + 5 - $(this).outerWidth() * 2;
+                    }
+                    else if(rightSidePosition<95){
+                        right = rightSidePosition + 5 - $(this).outerWidth() * 2;
+                        left ="unset";
+                    } 
+                    else{
+                        if($(parentID).find(".img-hotspot-content.left-position[data-hotspot="+hotspotAttr+"]").length || $(parentID).find(".img-hotspot-content.right-position[data-hotspot="+hotspotAttr+"]").length){
+                            top = $(this).position().top + height + 74 ;
+                        }
+                    }
+                   
+                }
+                else{
+                    if($(parentID).find(".img-hotspot-content.left-position[data-hotspot="+hotspotAttr+"]").length || $(parentID).find(".img-hotspot-content.right-position[data-hotspot="+hotspotAttr+"]").length){
+                        top = $(this).position().top + (height/2)  - hotspotHT;
+                    }
+                    else{
+                        top = $(this).position().top + height + 74 ;
+                    }
+                }
+                $(parentID).find(".img-hotspot-content[data-hotspot="+hotspotAttr+"]").css({
+                    'left': left +"px", 'top': top+"px", 'right':right,
+                })
+
+                $(this).addClass('show-content');
+                $(parentID).find(".img-hotspot-content[data-hotspot="+hotspotAttr+"]").addClass('img-hotspot-content-visible');
+
+            }
+           
+        });
+
+        // default first content visible script
+        if($('.wp-block-custom-ge-image-block-with-hotspot').length){
+            $('.wp-block-custom-ge-image-block-with-hotspot').each(function(){
+                var $this = $(this).find('.hotspot-container').children().first('.hotspot');
+                var firstElementHotspotAttr = $this.attr('data-hotspot');
+                var firstElementParentID = '#'+ $this.parents('.wp-block-custom-ge-image-block-with-hotspot').attr('id');
+                var firstElementHeight =  $this.height();
+                var firstElementWidth = $(firstElementParentID).find(".img-hotspot-content[data-hotspot="+firstElementHotspotAttr+"]").outerWidth() / 2 - $this.outerWidth() / 2;
+                var firstElementLeft = $this.position().left - firstElementWidth - 1;
+                var firstElementHotspotHT = $(firstElementParentID).find(".img-hotspot-content[data-hotspot="+firstElementHotspotAttr+"]").outerHeight()/2;
+                var firstElementRight = "unset" ;
+                var firstElementTop ;
+
+                if(window.outerWidth<992){
+                    var rightSidePosition=  $this.parents('.img-wrapper').width() - $this.position().left ;
+                    firstElementTop = $this.position().top + firstElementHeight + 74 ;
+                    if($this.position().left<95){
+                        firstElementLeft = $this.position().left + 5 - $this.outerWidth() * 2;
+                    }
+                    else if(rightSidePosition<95){
+                        firstElementRight = rightSidePosition + 5 - $this.outerWidth() * 2;
+                        firstElementLeft ="unset";
+                    } 
+                    else{
+                        if($(firstElementParentID).find(".img-hotspot-content.left-position[data-hotspot="+firstElementHotspotAttr+"]").length || $(firstElementParentID).find(".img-hotspot-content.right-position[data-hotspot="+firstElementHotspotAttr+"]").length){
+                            firstElementTop = $this.position().top + firstElementHeight + 74 ;
+                        }
+                    }
+                
+                }
+                else{
+                    if($(firstElementParentID).find(".img-hotspot-content.left-position[data-hotspot="+firstElementHotspotAttr+"]").length || $(firstElementParentID).find(".img-hotspot-content.right-position[data-hotspot="+firstElementHotspotAttr+"]").length){
+                        firstElementTop = $this.position().top + (height/2)  - firstElementHotspotHT;
+                    }
+                    else{
+                        firstElementTop = $this.position().top + firstElementHeight + 74 ;
+                    }
+                }
+                $(firstElementParentID).find(".img-hotspot-content[data-hotspot="+firstElementHotspotAttr+"]").css({
+                    'left': firstElementLeft +"px", 'top': firstElementTop+"px", 'right':firstElementRight,
+                })
+
+                $this.addClass('show-content');
+                $(firstElementParentID).find(".img-hotspot-content[data-hotspot="+firstElementHotspotAttr+"]").addClass('img-hotspot-content-visible');
+            });
+        }
+        
+
+    });
+})(jQuery, Drupal);

@@ -1,0 +1,185 @@
+let smallTabList = document.querySelectorAll(".wp-block-custom-ge-small-tabbed-content-feature");
+
+if (smallTabList.length) {
+    sizeCheck();
+    let smallTabListItem;
+    let tabHeading = document.querySelectorAll('.tabheading');
+    let tabActiveCheck = false;
+    for (smallTabListItem = 0; smallTabListItem < tabHeading.length; smallTabListItem++) {
+        tabHeading[smallTabListItem].addEventListener("click", function (e) {
+            let testvar = this.nextElementSibling;
+
+            testvar.style.display = 'none';
+
+            let tabParentCheck = this.closest('.wp-block-custom-ge-small-tabbed-content-feature');
+
+            if (this.classList.contains('active')) {
+
+                tabActiveCheck = true;
+            }
+            if (tabParentCheck.querySelectorAll('.tabheading.active').length) {
+
+                tabParentCheck.querySelector('.tabheading.active').classList.remove('active');
+
+
+                let childTab = tabParentCheck.querySelectorAll('.tabheading');
+                for (let childItem = 0; childItem < childTab.length; childItem++) {
+                    childTab[childItem].nextElementSibling.style.display = 'none';
+
+                }
+
+            }
+
+            if (tabActiveCheck) {
+
+                this.classList.remove('active');
+                testvar.style.display = 'none';
+
+
+
+            }
+            else {
+
+                this.classList.add('active');
+                testvar.style.display = 'block';
+
+
+            }
+
+
+            if (!e.currentTarget.classList.contains('active')) {
+                testvar.style.display = 'block';
+                this.classList.add('active');
+
+            }
+
+
+            tabActiveCheck = false;
+
+
+
+        });
+
+
+    }
+
+    window.onresize = () => {
+        if (window.outerWidth < 428) {
+            let sec = document.querySelectorAll('.wp-block-custom-ge-small-tabbed-content-feature');
+            let seclength = sec.length;  //2
+
+            for (let secVal = 0; secVal < seclength; secVal++) {
+                let childValue = sec[secVal].lastChild.lastChild.lastChild;
+                let topPosition = childValue.querySelectorAll('.rightsection');
+                let childCount = childValue.children.length; //3
+                for (let rightActive = 0; rightActive < childCount; rightActive++) {
+
+                    if (childCount === 1) {
+                        topPosition[rightActive].style.top = "100px";
+                    }
+                    if (childCount === 2) {
+                        topPosition[rightActive].style.top = "200px";
+                    }
+                    if (childCount === 3) {
+                        topPosition[rightActive].style.top = "282px";
+                    }
+                    if (childCount === 4) {
+                        topPosition[rightActive].style.top = "364px";
+                    }
+                    if (childCount === 5) {
+                        topPosition[rightActive].style.top = "444px";
+                    }
+                }
+
+            }
+
+
+        }
+        else {
+            let sec = document.querySelectorAll('.wp-block-custom-ge-small-tabbed-content-feature');
+            let seclength = sec.length;  //2
+
+            for (let secVal = 0; secVal < seclength; secVal++) {
+                let childValue = sec[secVal].lastChild.lastChild.lastChild;
+                let topPosition = childValue.querySelectorAll('.rightsection');
+                let childCount = childValue.children.length; //3
+                for (let rightActive = 0; rightActive < childCount; rightActive++) {
+                    topPosition[rightActive].style.top = "-0.75rem";
+                }
+            }
+        }
+
+
+    }
+
+
+    //first tab content visiblity----------   
+    let sectionList = document.querySelectorAll('.wp-block-custom-ge-small-tabbed-content-feature');
+    let sectionlength = sectionList.length;
+    for (i = 0; i < sectionlength; i++) {
+        let firstPosition = sectionList[i].lastChild.lastChild.lastChild;
+        tabheading = firstPosition.querySelector('.tabheading');
+        tabheading.classList.add('active');
+
+        rightPosition = firstPosition.querySelector('.rightsection');
+        rightPosition.style.display = 'block';
+
+    }
+
+
+    function sizeCheck() {
+
+        if (window.outerWidth < 428) {
+            let sec = document.querySelectorAll('.wp-block-custom-ge-small-tabbed-content-feature');
+            let seclength = sec.length;  //2
+            for (let secVal = 0; secVal < seclength; secVal++) {
+                let childValue = sec[secVal].lastChild.lastChild.lastChild;
+                let topPosition = childValue.querySelectorAll('.rightsection');
+                let childCount = childValue.children.length; //3
+                for (let rightActive = 0; rightActive < childCount; rightActive++) {
+
+                    if (childCount === 1) {
+                        topPosition[rightActive].style.top = "100px";
+                    }
+                    if (childCount === 2) {
+                        topPosition[rightActive].style.top = "200px";
+                    }
+                    if (childCount === 3) {
+                        topPosition[rightActive].style.top = "282px";
+                    }
+                    if (childCount === 4) {
+                        topPosition[rightActive].style.top = "364px";
+                    }
+                    if (childCount === 5) {
+                        topPosition[rightActive].style.top = "444px";
+                    }
+                }
+
+            }
+
+
+        }
+        else {
+            let sec = document.querySelectorAll('.wp-block-custom-ge-small-tabbed-content-feature');
+            let seclength = sec.length;  //2
+
+            for (let secVal = 0; secVal < seclength; secVal++) {
+                let childValue = sec[secVal].lastChild.lastChild.lastChild;
+                let topPosition = childValue.querySelectorAll('.rightsection');
+                let childCount = childValue.children.length; //3
+                for (let rightActive = 0; rightActive < childCount; rightActive++) {
+                    topPosition[rightActive].style.top = "-0.75rem";
+                }
+            }
+        }
+
+    }
+
+
+}
+
+
+
+
+
+

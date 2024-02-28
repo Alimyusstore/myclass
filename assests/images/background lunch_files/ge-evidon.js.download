@@ -1,0 +1,10 @@
+(function($, Drupal) {
+    Drupal.behaviors.geEvidon = {
+        attach: function(context) {
+            $(".evidon_cookie", context).click(function(e) {
+                e.preventDefault();
+                window.evidon.notice.showOptions();
+            });
+        }
+    }
+})(jQuery, Drupal);

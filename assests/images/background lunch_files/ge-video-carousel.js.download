@@ -1,0 +1,141 @@
+
+//import $ from "jquery";
+// Import Slick
+//import 'slick-carousel/slick/slick.min';
+
+// script for the ge-video-carousel
+// var Player;
+let carouselVideoElm = document.querySelectorAll('.wp-block-custom-ge-video-carousel');
+if (carouselVideoElm.length) {
+    for (let i = 0; i < carouselVideoElm.length; i++) {
+        let carouselElementID = carouselVideoElm[i].getAttribute('id');
+
+        let carouselCardElm = carouselVideoElm[i].querySelectorAll('.video-popup-card');
+        let carouselModalHTML = '';
+        for (let j = 0; j < carouselCardElm.length; j++) {
+            let carouselCardInstanceID = carouselCardElm[j].getAttribute('carousel-video-instance-id');
+            let carouselCardVidID = carouselCardElm[j].querySelector('.video-card-container').getAttribute('data-video');
+            let carouselCardVidClass;
+            let idcountID = 'carouselVideo' + carouselCardInstanceID + '-';
+            if (carouselCardElm[j].querySelector('.video-card-container').classList.contains('yt_iframe')) {
+                carouselCardVidClass = 'modal video-carousel-modal youtube-iframe';
+
+                carouselModalHTML += '<div class = "' + carouselCardVidClass + '" modal-instance-id ="' + carouselCardInstanceID + '"><div class="modal-dialog">' +
+                    ' <div class="modal-content"> <div class="modal-header">' +
+                    ' <button class="close video-modal-close ficon-close" data-dismiss="modal"></button></div>' +
+                    ' <div class="modal-body"><div class="video-carousel-player video-player-container" data-video="' + carouselCardVidID + '">' +
+                    ' <div id="' + idcountID + carouselCardVidID + '" class="video-card-carousel-player video-carousel-iframe" ></div>' +
+                    ' </div></div> </div></div> </div >';
+            } else if (carouselCardElm[j].querySelector('.video-card-container').classList.contains('ms_iframe')) {
+                carouselCardVidClass = 'modal video-carousel-modal msstream-iframe'
+
+                carouselModalHTML += '<div class = "' + carouselCardVidClass + '" modal-instance-id ="' + carouselCardInstanceID + '"><div class="modal-dialog">' +
+                    ' <div class="modal-content"> <div class="modal-header">' +
+                    ' <button class="close video-modal-close ficon-close" data-dismiss="modal"></button></div>' +
+                    ' <div class="modal-body"><div class="video-carousel-player video-player-container" data-video="' + carouselCardVidID + '">' +
+
+                    '<iframe class="video-iframe video-carousel-iframe" src="https://web.microsoftstream.com/embed/video/' + carouselCardVidID + '?showinfo=true&domain_hint=ge.com&autoplay=0"' +
+                    'frameborder="0" showinfo="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe> </div>' +
+                    ' </div></div> </div></div> ';
+            }
+            else {
+                carouselCardVidClass = 'modal video-carousel-modal video-elm'
+
+                carouselModalHTML += '<div class = "' + carouselCardVidClass + '" modal-instance-id ="' + carouselCardInstanceID + '"><div class="modal-dialog">' +
+                    ' <div class="modal-content"> <div class="modal-header">' +
+                    ' <button class="close video-modal-close ficon-close" data-dismiss="modal"></button></div>' +
+                    ' <div class="modal-body"><div class="video-player-container">' +
+                    '<video   class="carousel-video-player" controls><source src=' + carouselCardVidID + '></source></video></div>' +
+                    ' </div></div> </div></div> ';
+            }
+
+
+        }
+        document.getElementById(carouselElementID).insertAdjacentHTML("beforeend", carouselModalHTML);
+    }
+}
+// slick slider
+(function ($, Drupal) {
+    var carouselElement = $(".wp-block-custom-ge-video-carousel");
+    if (carouselElement.length) {
+        $.each(carouselElement, function () {
+
+            var carouselElementID = '#' + $(this).attr('id');
+
+            $(carouselElementID).find('.slider-items').on('init reinit', function (event, slick) {
+                if (slick.slideCount < 4) {
+                    $(carouselElementID).find('div.carousel-control').addClass("control-hidden");
+                }
+                else {
+                    $(carouselElementID).find('div.carousel-control').removeClass("control-hidden");
+                }
+            });
+            $(carouselElementID).find('.slider-items').slick({
+                speed: 300,
+                slidesToShow: 3.25,
+                slidesToScroll: 1,
+                infinite: false,
+                mobileFirst: true,
+                rows: 1,
+                variableWidth: true,
+                draggable: false,
+                prevArrow: carouselElementID + " .prev-arrow",
+                nextArrow: carouselElementID + " .next-arrow",
+
+                responsive: [
+                    {
+                        breakpoint: 1200, //mf min(1200)
+                        settings: {
+                            slidesToShow: 2.25,
+                            slidesToScroll: 1,
+                        },
+                    }, {
+                        breakpoint: 992,  //mf min(992)
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 1,
+                            draggable: true,
+                        },
+                    }, {
+                        breakpoint: 768, //mf min(768)
+                        settings: {
+                            slidesToShow: 1.6,
+                            slidesToScroll: 1,
+                            draggable: true,
+                        },
+                    }, {
+                        breakpoint: 576,  //mf min(576)
+                        settings: {
+                            slidesToShow: 1.5,
+                            slidesToScroll: 1,
+                            draggable: true,
+                        },
+                    }, {
+                        breakpoint: 300,  //mf min(320)
+                        settings: {
+                            slidesToShow: 1, //1.2
+                            slidesToScroll: 1,
+                        },
+                    },
+                    // You can unslick at a given breakpoint now by adding:
+                    // settings: "unslick"
+                    // instead of a settings object
+                ],
+            });
+
+
+
+        });
+    }
+})(jQuery, Drupal);
+
+
+// #############################################################################
+
+// ############# NOte : For video popup and Youtube api please check  ##########
+
+// ##########################  youtube-api.js ##################################
+
+// ########### common js file for all youtube video popup ######################
+
+// #############################################################################

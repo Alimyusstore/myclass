@@ -1,0 +1,15 @@
+
+var faq = document.getElementsByClassName("faqItem");
+var itemFaq;
+
+for (itemFaq = 0; itemFaq < faq.length; itemFaq++) {
+  faq[itemFaq].addEventListener("click", function () {
+    this.classList.toggle("active");
+    var panelAcc = this.nextElementSibling;
+    if (panelAcc.style.maxHeight) {
+      panelAcc.style.maxHeight = null;
+    } else {
+      panelAcc.style.maxHeight = panelAcc.scrollHeight + "px";
+    }
+  });
+}

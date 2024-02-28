@@ -1,0 +1,23 @@
+// script for apply gradient on mobile
+
+function gradientHeroFunc() {
+  let heroMobileGradientBg = document.querySelectorAll(".wp-block-custom-ge-hero-secondary-variant-3 .linear-gradient");
+  if (heroMobileGradientBg.length) {
+    for (let heroMobileGradientBgItem = 0; heroMobileGradientBgItem < heroMobileGradientBg.length; heroMobileGradientBgItem++) {
+      let gradientColorCode = heroMobileGradientBg[heroMobileGradientBgItem].getAttribute('data-color');
+      if (window.innerWidth <= 767) {
+        // heroMobileGradientBg[heroMobileGradientBgItem].style.background = `-moz-linear-gradient(top, rgba(${gradientColorCode}, 1) 37%,rgba(${gradientColorCode}, 0.49) 69%, rgba(${gradientColorCode}, 0) 100%)`;
+        // heroMobileGradientBg[heroMobileGradientBgItem].style.background = `-webkit-linear-gradient(top, rgba(${gradientColorCode}, 1) 37%,rgba(${gradientColorCode}, 0.49) 69%, rgba(${gradientColorCode}, 0) 100%)`;
+        heroMobileGradientBg[heroMobileGradientBgItem].style.background = `linear-gradient(to bottom, rgba(${gradientColorCode}, 1) 37%,rgba(${gradientColorCode}, 0.49) 69%, rgba(${gradientColorCode}, 0) 100%)`;
+      }
+      else {
+        heroMobileGradientBg[heroMobileGradientBgItem].style.background = `linear-gradient(to right,rgba(${gradientColorCode}, 1) 0%,rgba(${gradientColorCode}, 0.99) 1%,rgba(${gradientColorCode}, 0.5) 55%,rgba(${gradientColorCode}, 0.49) 56%,rgba(${gradientColorCode}, 0) 100% )`;
+      }
+    }
+  }
+};
+
+gradientHeroFunc();
+window.addEventListener('resize', function (event) {
+  gradientHeroFunc();
+}, true);

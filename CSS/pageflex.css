@@ -1,0 +1,120 @@
+.parent{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    max-width: 45%;
+    padding: 10px;
+    border-radius: 10px;
+    row-gap: 10px;
+    margin: 30px;
+    background-color: aliceblue;
+}
+
+.first, .second, .third {
+    display: flex;
+    justify-content: space-between;
+}
+
+span{
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.button {
+    background-color: rgb(35, 97, 242);
+    color: white;
+    border-radius: 45%;
+    border: 0;
+    padding: 2px 8px;
+}
+
+.flex-only {
+    background-color: rgb(159, 11, 252);
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    /* flex:1; */
+     max-width: 55%; 
+     align-items: center;
+    /* flex-shrink: 0; */
+    margin: 30px;
+
+}
+
+.flex-only div:first-of-type{
+   color: white;
+   font-size: 20px;
+}
+/* .flex-only div:nth-of-type(2){
+    flex: 2;
+}
+.flex-only div:nth-of-type(3){
+   flex: 1;
+  
+} */
+
+input{
+    border-radius: 20px;
+    border: 0;
+    padding: 5px 13px;
+    width: 500px;
+    height: 20px;
+}
+
+.download{
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    padding: 5px 8px;
+    font-size: 20px;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.profile-parent{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    max-width: 30%;
+    /* row-gap: 10px; */
+    margin: 30px;
+}
+
+.profile1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background-color: azure;
+}
+
+.pic-p1 {
+    display: grid;
+    grid-template-columns: 50px 120px;
+    column-gap: 10px;
+}
+
+.pic1{
+    align-self: center;
+}
+
+p{
+    color: rgba(108, 106, 106, 0.829);
+}
+
+.follow {
+    background-color: rgb(107, 131, 249);
+    color: white;
+    padding: 8px;
+    border: 0;
+    font-weight: 600;
+}
+.f1 {
+    align-self: center;
+
+}
+
+p,h4 {
+    margin: 0;
+}

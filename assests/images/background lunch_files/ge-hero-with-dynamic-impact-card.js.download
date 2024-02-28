@@ -1,0 +1,98 @@
+// Place your frontend scripts here
+// Import Slick
+//import 'slick-carousel/slick/slick.min';
+//import $ from "jquery";
+
+(function ($, Drupal) { 
+  
+	document.addEventListener('DOMContentLoaded', function(event) {
+    document.querySelectorAll(".wp-block-custom-ge-hero-with-dynamic-impact-card").forEach(function(el) {
+      var idx = el.getAttribute('data-ge-dynamic-card-instance-id');
+      var section = document.querySelector(".wp-block-custom-ge-hero-with-dynamic-impact-card[data-ge-dynamic-card-instance-id='" + idx + "']");
+      var rssEndpoint = section.getAttribute('data-feed-source');
+      var rssFeedItems;
+       // Using fetch to retrieve RSS Feeds
+      fetch(rssEndpoint, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache',
+        headers: {
+          "Content-Type": "application/rss+xml; charset=utf-8",
+          "Accept": "application/rss+xml",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, Accept",
+        },   
+      
+      }).then( ( response ) => {
+        if(!response.ok) {
+          return;
+        } 
+        else {
+          return response.text();  
+        }
+      }).then( ( text ) => {
+        return text;  
+      }).then( (data) => {
+  
+        var results = new DOMParser().parseFromString(data, "text/xml");
+        var items = results.querySelectorAll("item");
+
+        var rss_items = [];
+		
+        if (items.length) {
+		 var i =0; 
+		//items.forEach(function(el){
+        //for ( items; items< 3; items++) { 	// added for loop
+          items.forEach(function(el){
+			  if (i<3) {
+            var pubDate = el.querySelector("pubDate").innerHTML;
+            var date = new Date(pubDate);
+            var months = Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+            var string = months[date.getMonth()]  + " " + date.getDate() + ", " + date.getFullYear();
+
+            if(el.querySelector("enclosure")) {
+              rss_items.push({
+                "enclosure": el.querySelector("enclosure").getAttribute("url"),
+                "title": el.querySelector("title").innerHTML,
+                "link": el.querySelector("link").innerHTML,
+			    "pubDate": string,               
+              });
+            } else {
+              rss_items.push({
+                "title": el.querySelector("title").innerHTML,
+                "link": el.querySelector("link").innerHTML,
+                "pubDate": string,                
+              });
+            }  
+			i++;
+		  }			
+          });
+        //} //  end for loop
+        }
+        
+        return rss_items;        
+      }).then( (feed_items) => {
+        
+        var feeds_markup = '';
+        
+        if (feed_items.length) {
+          feed_items.forEach( function(item) {
+              feeds_markup +=         
+             `<div class="press-releases-feed">               
+              <div class="pub-date">
+              <p>${ item.pubDate }</p>
+              </div>
+              <div class="press-releases-title">
+              <p class="title body-3"><a href="${ item.link }" rel="noopener noreferrer">${ item.title }</a></p>
+              </div>
+              </div>`; 
+          });      
+        }
+
+       document.querySelector(".wp-block-custom-ge-hero-with-dynamic-impact-card[data-ge-dynamic-card-instance-id = '" + idx + "'] .feed-list").innerHTML = feeds_markup;           
+      }).catch(err => console.log('error', err));
+    })
+  });  
+  
+  })(jQuery, Drupal);
+  

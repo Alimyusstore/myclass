@@ -1,0 +1,31 @@
+// Place your frontend scripts here
+
+// button script
+
+let eleColFeature = document.querySelectorAll(".wp-block-custom-ge-column-feature .button_link");
+eleColFeature.forEach(function (index) {
+ index.addEventListener('mouseover', function (e) {
+   // Mouse Hover 
+   //console.log('script called');
+   let btnMouseHoverBackground = this.getAttribute("btn-mouse-hover-background");
+   let btnMouseHoverTextColor = this.getAttribute("btn-mouse-hover-text-color");
+   let btnMouseHoverBorderColor = this.getAttribute("btn-mouse-hover-border-color");
+
+   this.style.backgroundColor = btnMouseHoverBackground;
+   this.style.color = btnMouseHoverTextColor;
+   this.style.borderColor = btnMouseHoverBorderColor;
+ })
+
+ index.addEventListener('mouseout', function (e) {
+   //Mouse Out      
+   let btnMouseOutBackground = this.getAttribute("btn-mouse-out-background");
+   let btnMouseOutTextColor = this.getAttribute("btn-mouse-out-text-color");
+   let btnMouseOutBorderColor = this.getAttribute("btn-mouse-out-border-color");
+
+   this.style.backgroundColor = btnMouseOutBackground;
+   this.style.color = btnMouseOutTextColor;
+   this.style.borderColor = btnMouseOutBorderColor;
+ })
+
+})
+

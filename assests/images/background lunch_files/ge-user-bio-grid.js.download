@@ -1,0 +1,31 @@
+// Place your frontend scripts here
+
+/*
+  If you use frontend scripts, please uncomment the
+  corresponding line on "webpack.config.js"
+ */
+ 
+
+  (function () {
+    equalHeight();
+  })();
+   
+  // window.onresize = function(){
+  //   equalHeight();
+  // }
+   
+  function equalHeight() {
+    var findClass = document.getElementsByClassName('card-body-leader');
+    var tallest = 0; 
+    // Loop over matching divs
+    for(i = 0; i < findClass.length; i++)
+    {
+      var ele = findClass[i];
+      var eleHeight = ele.offsetHeight;
+      tallest = (eleHeight>tallest ? eleHeight : tallest);
+    }
+    for(i = 0; i < findClass.length; i++)
+    {
+      findClass[i].style.height = tallest + 50 + "px";
+    }
+  }

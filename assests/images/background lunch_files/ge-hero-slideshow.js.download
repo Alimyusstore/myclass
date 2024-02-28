@@ -1,0 +1,30 @@
+//import $ from "jquery";
+// Import Slick
+//import 'slick-carousel/slick/slick.min';
+(function ($, Drupal) {
+  // for video iframe
+  document.documentElement.setAttribute("data-browser", navigator.userAgent);
+  $(document).ready(function () {
+    $('.wp-block-custom-ge-hero-slideshow .ge-hero-slider-wrapper').slick({
+      dots: true,
+      arrows: true,
+      infinite: true,
+      speed: 500,
+      autoplay: false,
+      autoplaySpeed: 500,
+      fade: true,
+      cssEase: 'ease',
+      pauseOnHover: false
+    });
+  });
+})(jQuery, Drupal);
+
+// #############################################################################
+
+// ############# NOte : For video popup and Youtube api please check  ##########
+
+// ##########################  youtube-api.js ##################################
+
+// ########### common js file for all youtube video popup ######################
+
+// #############################################################################

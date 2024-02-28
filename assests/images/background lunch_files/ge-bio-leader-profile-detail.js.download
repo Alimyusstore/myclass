@@ -1,0 +1,11 @@
+// // Place your frontend scripts here
+
+  let printBio = document.getElementsByClassName("bio-leader-print-profile-section");
+
+  function printBioSection() {
+    window.print();
+  };
+  let printBioIndex;
+  for (printBioIndex = 0; printBioIndex < printBio.length; printBioIndex++) {
+    printBio[printBioIndex].addEventListener("click", printBioSection);
+  }

@@ -1,0 +1,41 @@
+// script for button
+
+let slimBtnElement = document.querySelectorAll(".wp-block-custom-ge-button-container .wp-block-custom-ge-button-content");
+if (slimBtnElement.length) {
+  for (let slimBtnElementItem = 0; slimBtnElementItem < slimBtnElement.length; slimBtnElementItem++) {
+    if (slimBtnElement[slimBtnElementItem].children[0].querySelector('a')) {
+      slimBtnElement[slimBtnElementItem].classList.add('button-with-link');
+    }
+
+  }
+}
+
+
+  // mouse hover and mouse out style added in the GE custom button     
+  let eleSlimText = document.querySelectorAll(".wp-block-custom-ge-button-container .button_link");
+   eleSlimText.forEach(function (index) {
+    index.addEventListener('mouseover', function (e) {
+      // Mouse Hover 
+      let btnMouseHoverBackground = this.getAttribute("btn-mouse-hover-background");
+      let btnMouseHoverTextColor = this.getAttribute("btn-mouse-hover-text-color");
+      let btnMouseHoverBorderColor = this.getAttribute("btn-mouse-hover-border-color");
+
+      this.style.backgroundColor = btnMouseHoverBackground;
+      this.style.color = btnMouseHoverTextColor;
+      this.style.borderColor = btnMouseHoverBorderColor;
+    })
+
+    index.addEventListener('mouseout', function (e) {
+      //Mouse Out    
+      let btnMouseOutBackground = this.getAttribute("btn-mouse-out-background");
+      let btnMouseOutTextColor = this.getAttribute("btn-mouse-out-text-color");
+      let btnMouseOutBorderColor = this.getAttribute("btn-mouse-out-border-color");
+
+      this.style.backgroundColor = btnMouseOutBackground;
+      this.style.color = btnMouseOutTextColor;
+      this.style.borderColor = btnMouseOutBorderColor;
+    })
+
+  })
+
+

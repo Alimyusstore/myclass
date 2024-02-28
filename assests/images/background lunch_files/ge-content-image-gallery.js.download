@@ -1,0 +1,53 @@
+(function ($, Drupal) {
+  let contentImgBlock = document.querySelectorAll('.wp-block-custom-ge-content-image-gallery');
+  if (contentImgBlock) {
+    for (let i = 0; i < contentImgBlock.length; i++) {
+
+      let instanceID = contentImgBlock[i].getAttribute('instance-id');
+
+      if (contentImgBlock[i].querySelectorAll('.multiple-items').length) {
+        $(`.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] .multiple-items`).on('init reinit', function (event, slick) {
+          if (slick.slideCount <= 4) {
+            $(`.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] div.carousel-control`).hide();
+            $(`.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] .multiple-items`).addClass('no-slick');
+          }
+          else {
+            $(`.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] div.carousel-control`).show();
+          }
+        });
+        $(`.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] .multiple-items`).slick({
+          speed: 300,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          prevArrow: `.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] .ctrl-prev`,
+          nextArrow: `.wp-block-custom-ge-content-image-gallery[instance-id='${instanceID}'] .ctrl-next`,
+        });
+      }
+
+      if (contentImgBlock[i].querySelectorAll('.wp-block-custom-ge-add-photo-block:not(.slick-cloned)').length) {
+        window.addEventListener('load', function () {
+          const imgPath = contentImgBlock[i].querySelectorAll('.image-wrapper picture img')[0];
+          const sourcePath = contentImgBlock[i].querySelectorAll('.image-wrapper picture source')[0];
+          const thumbImage = contentImgBlock[i].querySelectorAll('.wp-block-custom-ge-add-photo-block');
+          const firstImage = contentImgBlock[i].querySelector('.wp-block-custom-ge-add-photo-block[data-slick-index="0"] picture img').src;
+          const firstCaptionText = contentImgBlock[i].querySelectorAll('.img-caption')[0].innerText;
+          const captionText = contentImgBlock[i].querySelector('.image-wrapper .text-wrapper-p-img');
+
+
+          imgPath.src = firstImage;
+          sourcePath.srcset = firstImage;
+          captionText.innerText = firstCaptionText;
+          thumbImage.forEach(function (value) {
+            value.addEventListener('click', function () {
+              imgPath.src = this.querySelector('picture img').src;
+              sourcePath.srcset = this.querySelector('picture img').src;
+              captionText.innerText = this.querySelector('.img-caption').innerText;
+            });
+          });
+        });
+      }
+    }
+  }
+})(jQuery, Drupal);
+
+

@@ -1,0 +1,104 @@
+(function ($, Drupal) {
+$(document).ready(function () {
+
+  for(var i = 0; i <= 9; i++) { 
+    if ($('.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .slider-items').length) {
+      // Get count of slides
+      $('.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .slider-items').on('init reinit', function (event, slick) {
+
+        if (slick.slideCount < 4) {
+          $('.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] div.carousel-control').addClass('control-hidden');
+        }
+        else {
+          $('.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] div.carousel-control').removeClass('control-hidden');
+        }
+      });
+      
+      $('.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .slider-items').slick({
+        speed: 300,
+        // slidesToShow: 4,
+        initialSlide: 0,
+        slidesToScroll: 1,
+        variableWidth: true,
+        prevArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-prev',  
+        nextArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-next',
+        infinite: true,
+        mobileFirst: true,
+        rows: 1,
+
+        responsive: [{
+          breakpoint: 1200, // mf min(1200)
+          settings: {
+            // slidesToShow: 2.2,
+            initialSlide: 0,
+            infinite: true,
+            slidesToScroll: 1,
+            rows: 1,
+            prevArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-prev',  
+            nextArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-next',
+            variableWidth: true,
+          },
+        }, {
+          breakpoint: 992,  // mf min(992)
+          settings: {
+            // slidesToShow: 1.8,
+            initialSlide: 0,
+            infinite: true,
+            slidesToScroll: 1,
+            rows: 1,
+            prevArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-prev',  
+            nextArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-next',
+            variableWidth: true,
+          },
+        }, {
+          breakpoint: 767, // mf min(767)
+          settings: {
+            // slidesToShow: 1.6,
+            initialSlide: 0,
+            infinite: true,
+            slidesToScroll: 1,
+            rows: 1,
+            prevArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-prev',  
+            nextArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-next',
+            variableWidth: true,
+          },
+        }, {
+          breakpoint: 576,  // mf min(576)
+          settings: {
+            // slidesToShow: 1.5,
+            slidesToScroll: 1,
+            initialSlide: 0,
+            infinite: true,
+            
+            rows: 1,
+            prevArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-prev',  
+            nextArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-next',
+            variableWidth: true,
+          },
+        }, {          
+          breakpoint: 300,  // mf min(320)
+          settings: {
+            // slidesToShow: 1,
+            initialSlide: 0,
+            infinite: true,
+            slidesToScroll: 1,
+            
+            rows: 1,
+            prevArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-prev',  
+            nextArrow: '.wp-block-custom-ge-hero-secondary-variant-with-card[data-ge-hero-secondary-variant-with-card-instance-id = \'' + i + '\'] .ctrl-next',
+            variableWidth: true,
+          },
+        },
+        
+
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ],
+                    
+      });    
+    }    
+  }
+  
+});
+})(jQuery, Drupal);

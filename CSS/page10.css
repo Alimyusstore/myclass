@@ -1,0 +1,55 @@
+body{
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.parent {
+    width: 40%;
+    height: 20vh;
+    background-color: black;
+    display: flex;  
+    border-radius: 10px; 
+    overflow: hidden;   
+}
+
+#babyblue {
+    background-color: #8ecae6;
+}
+
+#cerulean {
+    background-color: #219ebc;
+
+}
+
+#navyblue {
+   
+    background-color: #023047;
+    
+}
+
+#goldenrod {
+  
+    background-color: #ffb703;
+}
+
+#tangerine{
+    background-color: #fb8500; 
+}
+.children {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+}
+
+.children:hover {
+    width: 40%;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 25px;
+    transition: 0.5s all ease-in-out;
+    cursor: pointer;
+    text-transform: uppercase;
+}

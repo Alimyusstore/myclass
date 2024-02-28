@@ -1,0 +1,68 @@
+.ge-mail-chimp-section #subscription-form .form-field .form-group input {
+ height: 64px !important;
+ border-radius: 30px;
+ background-color: hsla(0,0%,100%,.1) !important;
+ margin-right: 20px;
+ padding: 12px 0 16px 36px;
+ border: none;
+ color: var(--ge-white);
+ outline: none;
+ border: 2px solid #1e2f46;
+}
+.ge-mail-chimp-section #subscription-form .form-field{
+  margin: 2rem 0;
+}
+
+#ge-mail-chimp-section .news-letter #subscription-form .ge-new-business .aviation,
+#ge-mail-chimp-section .news-letter #subscription-form .ge-new-business .healthcare,
+#ge-mail-chimp-section .news-letter #subscription-form .ge-new-business .energy {
+	width: 27px !important;
+    height: 34px;
+    margin-right: 10px;
+}
+#ge-mail-chimp-section .news-letter #subscription-form .ge-new-business label {
+	margin-top: -20px;
+    vertical-align: middle;
+}
+
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	.ge-mail-chimp-section #subscription-form .form-field .row .form-group h6 {
+		font-size: 12px;
+	}  
+  }
+
+@media only screen and (max-device-width: 767px){
+	.ge-mail-chimp-section #subscription-form .d-flex button {
+		height: 64px !important;
+		border-radius: 30px;
+		border: none;
+		outline: none;
+		border: 2px solid #1e2f46;
+		width: 93%;
+		position: absolute;
+	}	
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	.ge-mail-chimp-section #subscription-form .form-field .row .form-group h6 {
+		font-size: 10px;
+	}
+  }
+ 
+/* Styles  - GECOM-4058 - Mailchimp form: Union Negotiations */
+
+#ge-mail-chimp-section .news-letter #subscription-form .form-field input {
+	background-color: #fff !important;
+	border-radius: 15px !important;
+	height: 50px !important;
+	color: #000 !important;
+}
+.union-negotiations #subscription-form div#ge-mail-message {
+	margin-left: 0px; !important;
+}

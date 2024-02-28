@@ -1,0 +1,276 @@
+/* custom css for the new gutenberg editor */
+.has-normal-font-size,
+.has-small-font-size,
+.has-medium-font-size,
+.has-large-font-size,
+.has-huge-font-size,
+.has-x-large-font-size {
+  letter-spacing: normal !important;
+  line-height: normal !important;
+}
+
+.gutenberg__editor .wp-block-button__link {
+  margin: 0 10px !important;
+}
+
+.wp-block-custom-ge-hero-landing .wp-block-button__link {
+  padding: 0 2rem !important;
+}
+
+.wp-block button.components-button.components-toolbar__control.has-icon {
+  z-index: 1;
+  background: var(--ge-white);
+}
+
+.block-editor-button-block-appender {
+  background: var(--ge-white);
+}
+
+.gblox-page__body p {
+  line-height: normal;
+}
+
+/* align issue in editor */
+.gutenberg__editor .wp-block-custom-ge-hero-jumplinks.alignfull,
+.gutenberg__editor .alignfull {
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding-left: 0 !important;
+}
+
+/* For the Image width issue */
+.gutenberg__editor .wp-block[data-align="wide"] img,
+.gutenberg__editor .wp-block[data-align="full"] img {
+  width: auto;
+}
+
+/* spotlight */
+.gutenberg__editor
+  .wp-block-custom-ge-spotlight-large
+  div.edit-slider-items
+  div.block-editor-block-list__layout {
+  min-height: 710px;
+}
+
+.gutenberg__editor
+  .wp-block-custom-ge-spotlight
+  div.edit-slider-items
+  div.block-editor-block-list__layout {
+  min-height: 650px;
+}
+
+.gutenberg__editor
+  section.wp-block-custom-ge-spotlight-large
+  div.edit-slider-items
+  div.block-list-appender
+  .block-editor-button-block-appender,
+.editor-styles-wrapper
+  section.wp-block-custom-ge-spotlight-small-variant-1
+  div.edit-slider-items
+  div.block-list-appender
+  .block-editor-button-block-appender {
+  background-color: var(--ge-white);
+}
+
+.gutenberg__editor
+  .wp-block-custom-ge-spotlight
+  .edit-slider-items
+  .block-editor-block-list__layout
+  .block-list-appender,
+.gutenberg__editor
+  .wp-block-custom-ge-spotlight-small-variant-1
+  .edit-slider-items
+  .block-editor-block-list__layout
+  .block-list-appender,
+.gutenberg__editor
+  .wp-block-custom-ge-spotlight-large
+  .edit-slider-items
+  .block-editor-block-list__layout
+  .block-list-appender {
+  bottom: 0;
+}
+
+/* JIRA 374 : style fixes for Editor and Preview */
+/* GE Download with Left Right Image */
+.wp-block-custom-ge-download-with-left-right-image
+  .wp-block-custom-ge-text-list-content
+  :is(.section-title, .section-sub-heading, .section-desc),
+.wp-block-custom-ge-download-with-left-right-image
+  .wp-block-custom-ge-text-content
+  :is(.section-title, .section-desc) {
+  padding: 0 !important;
+}
+
+/* GE User Bio Grid */
+.wp-block-custom-ge-user-bio-grid
+  .wp-block-custom-ge-titled-button
+  :is(h1, h2, h3, h4, h5, h6) {
+  padding: 2rem 0 !important;
+}
+
+.wp-block-custom-ge-user-bio-grid
+  .wp-block-custom-ge-titled-button
+  .hero-subtitle {
+  padding: 0 !important;
+}
+
+/* GE Parallax */
+/* .wp-block-custom-ge-parallax .is-style-outline>.wp-block-button__link, .wp-block-button__link.is-style-outline {
+  padding: 0 2em !important;
+} */
+
+/* JIRA 374 End*/
+/* GE Timeline */
+.gutenberg__editor
+  .wp-block-custom-ge-timeline-date-container
+  .block-list-appender,
+.editor-styles-wrapper
+  .wp-block-custom-ge-timeline-date-container
+  .block-list-appender {
+  bottom: 0px !important;
+}
+
+/* GE Fixed Background Block */
+.gutenberg__editor
+  .wp-block-custom-ge-fixed-background-scrolling-content
+  .picture-bg,
+.gutenberg__editor
+  .wp-block-custom-ge-fixed-background-scrolling-content
+  .video-bg,
+.gutenberg__editor
+  .wp-block-custom-ge-fixed-background-scrolling-content
+  .color-bg {
+  z-index: 0;
+}
+
+.gutenberg__editor
+  .wp-block[data-align="full"]
+  .wp-block-custom-ge-fixed-background-scrolling-content
+  .picture-bg
+  img {
+  width: 100% !important;
+}
+
+.gutenberg__editor
+  .edit-post-layout
+  .interface-interface-skeleton__sidebar
+  .edit-post-sidebar
+  h2,
+.gutenberg__editor .edit-post-layout .block-editor-inserter__panel-header h2,
+.gutenberg__editor
+  .edit-post-layout
+  .interface-interface-skeleton__editor
+  .interface-interface-skeleton__body
+  .edit-post-editor__inserter-panel-content
+  h2 {
+  letter-spacing: inherit;
+}
+
+/* Appender Button issue style  UC-410,UC-411,UC-414,UC-415,UC-417*/
+.edit-post-visual-editor .block-editor-button-block-appender {
+  padding: 21px;
+  outline: 1px dashed #8d96a0;
+  width: 100%;
+  color: #555d66;
+  background: rgba(237, 239, 240, 0.8);
+}
+
+.edit-post-visual-editor .block-editor-button-block-appender:active {
+  outline: 1px dashed #191e23;
+  color: #191e23;
+}
+
+.edit-post-visual-editor .block-editor-button-block-appender:focus,
+.edit-post-visual-editor .block-editor-button-block-appender:hover {
+  outline: 1px dashed #555d66;
+  color: #191e23;
+}
+
+.edit-post-visual-editor .block-editor-button-block-appender svg {
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.gutenberg__editor
+  .wp-block-custom-ge-full-width-section-dropdown-content
+  .block-editor-block-list__layout
+  .block-list-appender
+  .components-button
+  svg,
+.editor-styles-wrapper
+  .wp-block-custom-ge-full-width-section-dropdown-content
+  .block-editor-block-list__layout
+  .block-list-appender
+  .components-button
+  svg {
+  /* background: rgba(237,239,240,.8); */
+  background: transparent;
+  color: #555d66;
+}
+
+.gutenberg__editor
+  .wp-block-custom-ge-full-width-section-dropdown-content
+  .block-editor-block-list__layout
+  .block-list-appender
+  .components-button:hover
+  svg,
+.editor-styles-wrapper
+  .wp-block-custom-ge-full-width-section-dropdown-content
+  .block-editor-block-list__layout
+  .block-list-appender
+  .components-button:hover
+  svg {
+  color: #191e23;
+}
+
+/*GE Large Text With Images  */
+.gutenberg__editor
+  .wp-block-custom-ge-large-text-with-images
+  .block-list-appender,
+.editor-styles-wrapper
+  .wp-block-custom-ge-large-text-with-images
+  .block-list-appender {
+  position: relative !important;
+  bottom: 0 !important;
+  top: 50px !important;
+}
+
+.gutenberg__editor .wp-block-custom-ge-large-text-with-images,
+.editor-styles-wrapper .wp-block-custom-ge-large-text-with-images {
+  min-height: 200px;
+}
+
+/*ge-download-grid-variant-1 */
+.gutenberg__editor
+  .wp-block-custom-ge-download-grid-variant-1
+  div.block-list-appender {
+  bottom: inherit;
+}
+
+/* GE Grid */
+.gutenberg__editor
+  .wp-block-custom-ge-grid
+  .grid-items.row
+  > .block-editor-inner-blocks
+  > .block-editor-block-list__layout {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* GE Feature Content Carousel */
+.gutenberg__editor
+  section.wp-block-custom-ge-feature-content-carousel
+  div.main-container-content-carousel
+  .content-carousel-slider-container-row
+  .content-carousel-slider-items
+  div.block-editor-inner-blocks
+  div.block-editor-block-list__layout
+  div.block-list-appender {
+  bottom: 1rem;
+}
+
+/* drupal button text alignment issue */
+.is-style-outline > .wp-block-button__link,
+.wp-block-button__link.is-style-outline {
+  padding: 0 2em !important;
+}

@@ -1,0 +1,88 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: grey;
+    width: 100%;
+    height: 100vh;
+}
+
+section{
+    width: 70%;
+    height: 100%;
+    display: grid;
+    grid-template: "logo logo logo logo" 20%
+                   "ab1 ab ab2 ab3" 20%
+                   "ab8 ab9 abc ab4" 20%
+                   "ab7 ab6 ab5 ab2" 20%
+                   "abd abe abf ab0" 20% / 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 20px;
+}
+
+section div:nth-of-type(1){
+    background-image: linear-gradient(#8d8484, rgb(192, 141, 243), #6a19bc);
+    grid-area: logo;
+}
+
+.ab{
+    background-image: linear-gradient(#115, #531, #f34);
+    grid-area: ab1;
+}
+.ab1{
+    background-image: linear-gradient(#1f5, #111fa1, #f2a);
+    grid-area: ab8;
+}
+.ab2{
+    background-image: linear-gradient(rgb(91, 91, 235), #531, #f34);
+    grid-area: ab7;
+}
+.ab3{
+    background-image: linear-gradient(rgb(76, 76, 134), #531, rgb(185, 100, 107));
+    grid-area: abd;
+}
+.ab4{
+    background-image: linear-gradient(#115, #531, rgb(188, 132, 79));
+    grid-area: ab8;
+}
+.ab5{
+    background-image: linear-gradient(#115, #531, #f34);
+    grid-area: ab9;
+}
+.ab6{
+    background-image: linear-gradient(#115, rgb(196, 134, 71), rgb(202, 219, 146));
+    grid-area: abc;
+}
+.ab7{
+    background-image: linear-gradient(#115, #531, #f34);
+    grid-area: ab4;
+}
+.ab8{
+    background-image: linear-gradient(rgb(96, 96, 226), rgb(23rgb(169, 103, 109)92, 153), #f34);
+    grid-area: ab7;
+}
+.ab9{
+    background-image: linear-gradient(#115, #531, #f34);
+    grid-area: ab6;
+}
+.ab0{
+    background-image: linear-gradient(#115, #531, #e8727c);
+    grid-area: ab5;
+}
+.abc{
+    background-image: linear-gradient(#115, #531, #d44a56);
+    grid-area: ab2;
+}
+.abd{
+    background-image: linear-gradient(#115, rgb(17, 76, 85), #f34);
+    grid-area: abe;
+}
+.abe{
+    background-image: linear-gradient(#115, rgb(177, 139, 100), #f34);
+    grid-area: abf;
+}
+.abf{
+    background-image: linear-gradient(#115, rgb(155, 111, 66), #f34);
+    grid-area: ab0;
+}

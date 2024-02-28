@@ -1,0 +1,35 @@
+// Video player
+//import $ from 'jquery';
+(function ($) {
+
+  $(document).ready(function () {
+    $('.wp-block-custom-ge-ms-stream-video .play-button').on('click', function (ev) {
+      var iframeID = $(this).parents('.wp-block-custom-ge-ms-stream-video').find('iframe').attr('id');
+      $(".wp-block-custom-ge-ms-stream-video #"+ iframeID).addClass('active');
+      $(this).parents('.wp-block-custom-ge-ms-stream-video').find('h1').hide();
+      $(".wp-block-custom-ge-ms-stream-video #"+ iframeID)[0].src += "&autoplay=true";
+      $(".wp-block-custom-ge-ms-stream-video #"+ iframeID).trigger('click');
+     
+      
+  
+      // video traking
+      var videoURLs = $('.wp-block-custom-ge-ms-stream-video .video-player #'+ iframeID).attr('src');
+      var videotitles = $(this).parents('.wp-block-custom-ge-ms-stream-video').find('h1').html();
+      var stripedtitle = videotitles.replace(/<[^>]+>/g, '');
+      $.trim(stripedtitle);
+
+      dataLayer.push({
+        'event': 'videoPlay',
+        'eventCategory': 'content',
+        'eventAction': 'video engagement',
+        'videoProvider': 'Youtube',
+        'videoStatus': 'Open',
+        'videoURL': videoURLs,
+        'videoTitle': stripedtitle
+      });
+
+      ev.preventDefault();
+    });
+  });
+
+})(jQuery);

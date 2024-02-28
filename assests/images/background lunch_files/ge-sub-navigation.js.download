@@ -1,0 +1,336 @@
+// Place your frontend scripts here
+//import $ from 'jquery';
+//import jquery from 'jquery';
+
+(function ($, Drupal) {
+    $.fn.subNav = function (options) {
+        const DEFAULT_SELECTORS = {
+            navActiveClass: 'active',       // Selected nav item modifier class
+            navStickyClass: 'sticky',       // Sticky nav modifier class
+            sectionSelector: 'section'       // Section id, class or tag selector
+        };
+
+        // Merge options with defaults
+        const selectors = $.extend({}, DEFAULT_SELECTORS, options);
+
+        // Set jQuery DOM elements
+        const $subNavGE = this;
+        const $navLinks = $subNavGE.find('a');
+        const $sections = $(selectors.sectionSelector);
+
+        const navHeight = $subNavGE.outerHeight();
+        const scrollTopOffset = $sections.first().outerHeight() + navHeight // height calculated
+
+        let currentScrollPosition = 0;
+        let sectionOffsetArray = [];
+
+
+        function initialise() {
+            calculateOffsets();
+            bindEvents();
+        }
+
+        function bindEvents() {
+            $navLinks.on('click', onClick);
+            $(window).on('scroll', throttle(onScroll, 50));
+        }
+
+        function onClick(e) {
+            e.preventDefault();
+            const targetEl = $(this).attr('href');
+
+            if ($(targetEl).length) {
+                selectNavItem(this);
+
+                if (window.scroll) {
+                    window.scroll({
+                        top: $(targetEl).offset().top - navHeight,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    $('html, body').animate({
+                        scrollTop: $(targetEl).offset().top - navHeight
+                    });
+                }
+            }
+        }
+
+        function onScroll() {
+            var scrollTop = $(document).scrollTop() + navHeight,
+                closestPosition = findClosestNumber(scrollTop, sectionOffsetArray);
+
+            // select navbar item
+            if (closestPosition !== currentScrollPosition) {
+                selectNavItem('.section-offset-' + closestPosition);
+                currentScrollPosition = closestPosition;
+            }
+
+            // fix navbar
+            if (scrollTop > scrollTopOffset) {
+                $subNavGE.addClass(selectors.navStickyClass); // add your code here
+
+
+
+                // show and hide nav item button
+                if ($(window).width() >= 768) {
+                    $(".show").show();
+
+                    $(".show").click(function (e) { // on click expand navigation
+                        $(".sticky li h6 a").show(200) && $(".show").hide();
+                        e.stopPropagation();
+                        /*	$(".active").css("background-color", "#1e2f46");
+                            $('.lightBox').addClass('lightBoxOverly');
+                            $('.lightBox').css({
+                                'display': 'block',
+                                'position': 'fixed',
+                                'z-index': '-1',
+                                'height': '100%',
+                                'opacity': '0.7',
+                                'top': '0',
+                                'left': '0',
+                                'right': '0',
+                                'bottom':'0',
+                                'background-color': 'rgba(0,0,0,.7)',
+                            });     */
+                    });
+                    /* *///.dd-lightbox
+                    $(document).click(function () {
+                        $(".sticky li h6 a").hide() && $(".sticky li h6 a.active").show() && $(".show").show();
+                        //$(".lightBox").removeClass("lightBoxOverly");
+                        //$(".lightBox").removeAttr("style");
+
+                    });
+                    $(document).scroll(function () {
+                        $(".sticky li h6 a").hide() && $(".sticky li h6 a.active").show() && $(".show").show();
+                        // $(".lightBox").removeClass("lightBoxOverly");
+                        // $(".lightBox").removeAttr("style");
+                    });
+                }
+
+            }
+
+            else {
+                $subNavGE.removeClass(selectors.navStickyClass);
+                $(".wp-block-custom-ge-sub-navigation .subNavGE ul li h6 a").removeAttr("style");// remove inline style
+                $(".show").removeAttr("style");
+                // $(".lightBox").removeClass("lightBoxOverly");
+
+                // clear hide show button
+                $(document).click(function () {
+                    $(".show").hide();// for the more menu
+                });
+                $(document).scroll(function () {
+                    $(".show").hide();// for the more menu
+                });
+            }
+        }
+
+
+
+        function calculateOffsets() {
+            $sections.each(function (index) {
+                const el = $(this)[0];
+                const offsetTop = getOffsetTop(el);
+
+                sectionOffsetArray.push(offsetTop);
+                getNavItem(el).addClass('section-offset-' + offsetTop);
+            });
+        }
+
+        function getOffsetTop(el) {
+            const rect = el.getBoundingClientRect(),
+                scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            return Math.round(rect.top + scrollTop);
+        }
+
+        function getNavItem(el) {
+            return $('.wp-block-custom-ge-sub-navigation .subNavGE a[href="#' + $(el).attr('id') + '"]');
+        }
+
+        function selectNavItem(el) {
+            if (!$subNavGE.hasClass(selectors.navStickyClass)) {
+                $subNavGE.addClass(selectors.navStickyClass);
+            }
+            $navLinks.removeClass(selectors.navActiveClass);
+            $(el).addClass(selectors.navActiveClass);
+            $(".wp-block-custom-ge-sub-navigation .subNavGE ul li h6 a").removeAttr("style");// remove inline style
+
+        }
+
+        function findClosestNumber(num, arr) {
+            return arr.reduce(function (prev, curr) {
+                return (Math.abs(curr - num) < Math.abs(prev - num) ? curr : prev);
+            });
+        }
+
+        function throttle(func, delay) {
+            let timer = 0;
+
+            return function () {
+                const context = this,
+                    args = [].slice.call(arguments);
+
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    func.apply(context, args);
+                }, delay);
+            };
+        }
+        initialise();
+    };
+
+    if ($('.wp-block-custom-ge-sub-navigation .subNavGE h6 a').length > 0) {
+        $('.wp-block-custom-ge-sub-navigation .subNavGE li').addClass('padd-LR');
+    } else {
+        $('.wp-block-custom-ge-sub-navigation .subNavGE li').removeClass('padd-LR');
+    }
+
+    // sticky navigation
+
+    //changes added for block ge sub navigation exist or not
+    $(document).ready(function () {
+        let blockCheck = document.querySelectorAll(".wp-block-custom-ge-sub-navigation");
+        if (blockCheck.length > 0){
+        $('.wp-block-custom-ge-sub-navigation .subNavGE').subNav();
+        }
+        
+    });
+//changes added for block ge sub navigation exist or not
+    $(window).resize(function () {
+        let blockCheck = document.querySelectorAll(".wp-block-custom-ge-sub-navigation");
+        if (blockCheck.length > 0) {
+        $('.wp-block-custom-ge-sub-navigation .subNavGE').subNav();
+        }
+    });
+
+
+    // mobile and tablet view port
+    $(document).ready(function () {
+        // $(window).resize(function(){
+
+        if ($(window).width() <= 767) {
+            // grab the initial top offset of the navigation
+            var subNav = function () {
+                var subNavTop = $('.wp-block-custom-ge-sub-navigation .subNavGE').offset();
+                // our function that decides weather the navigation bar should have "fixed" css position or not.
+                var scrollTop = $(window).scrollTop() - 81; // our current vertical position from the top
+                // if we've scrolled more than the navigation, change its position to fixed to stick to top,
+                // otherwise change it back to relative
+                if (scrollTop == subNavTop) {
+                    $('.wp-block-custom-ge-sub-navigation .subNavGE').addClass('animation');
+                } else {
+                    $('.wp-block-custom-ge-sub-navigation .subNavGE').removeClass('left');
+                    $(".wp-block-custom-ge-sub-navigation .subNavGE").removeAttr("style");
+                }
+                if (($('.wp-block-custom-ge-sub-navigation .subNavGE ul li a').hasClass('active'))) {
+                    var activeMenu = $('.active').offset();
+                    var activeMenuPostion = activeMenu.left;
+                    // third list element offset
+                    var first = $(".wp-block-custom-ge-sub-navigation .subNavGE ul li:nth-child(1)").offset(); // offset valu of the 3rd navigation bar of navigation
+                    var firstLeft = first.left;
+                    var firstPossion = JSON.stringify(firstLeft); // converted offset object value to string
+                    //forth list element offset
+                    var second = $(".wp-block-custom-ge-sub-navigation .subNavGE ul li:nth-child(2)").offset(); // offset valu of the 3rd navigation bar of navigation
+                    var secondLeft = second.left;
+                    var secondPossion = JSON.stringify(secondLeft); // converted offset object value to string
+                    // third list element offset
+                    var third = $(".wp-block-custom-ge-sub-navigation .subNavGE ul li:nth-child(3)").offset(); // offset valu of the 3rd navigation bar of navigation
+                    var thirdLeft = third.left;
+                    var thirdPossion = JSON.stringify(thirdLeft); // converted offset object value to string
+                    //forth list element offset
+                    var fourth = $(".wp-block-custom-ge-sub-navigation .subNavGE ul li:nth-child(4)").offset(); // offset valu of the 3rd navigation bar of navigation
+                    var fourthLeft = fourth.left;
+                    var fourthPossion = JSON.stringify(fourthLeft); // converted offset object value to string
+                    // third list element offset
+                    var fifth = $(".wp-block-custom-ge-sub-navigation .subNavGE ul li:nth-child(3)").offset(); // offset valu of the 3rd navigation bar of navigation
+                    var fifthLeft = fifth.left;
+                    var fifthPossion = JSON.stringify(fifthLeft); // converted offset object value to string
+                    //forth list element offset
+                    var six = $(".wp-block-custom-ge-sub-navigation .subNavGE ul li:nth-child(5)").offset(); // offset valu of the 3rd navigation bar of navigation
+                    var sixLeft = six.left;
+                    var sixPossion = JSON.stringify(sixLeft); // converted offset object value to string
+
+                    //if ($(window).innerWidth() <= 425) {
+                        if ($(window).width() <= 425 && activeMenuPostion > thirdPossion) {
+                            $('.wp-block-custom-ge-sub-navigation .subNavGE ul').addClass('scrolled');
+                            $('.scrolled').css({
+                                'left': - 100,
+                                'behavior': 'smooth',
+                                'transition-property': 'all',
+                                'transition-property': 'transform',
+                                //'position': 'absolute',
+                            });
+
+                            $(".wp-block-custom-ge-sub-navigation .subNavGE ul").on("swipe",function(){
+                                $(".wp-block-custom-ge-sub-navigation .subNavGE ul").removeAttr("style");
+                              });
+                        }
+
+                        else {
+                            $(".wp-block-custom-ge-sub-navigation .subNavGE ul").removeAttr("style");
+                        }
+
+                        if (activeMenuPostion > fourthPossion) {
+                            $('.wp-block-custom-ge-sub-navigation .subNavGE ul').addClass('scrolled');
+                            $('.scrolled').css({
+                                'left': -300,
+                                'behavior': 'smooth',
+                                'transition-property': 'all',
+                                'transition-property': 'transform',
+                                'transition-duration': '0.2s',
+                            });
+
+                            $(".wp-block-custom-ge-sub-navigation .subNavGE ul").on("swipe",function(){
+                                $(".wp-block-custom-ge-sub-navigation .subNavGE ul").removeAttr("style");
+                              });
+                        }
+
+                        else {
+                            $(".wp-block-custom-ge-sub-navigation .subNavGE ul").removeAttr("style");
+                        }
+                }
+            };
+            // sticky function
+            subNav();
+            // and run it again every time you scroll
+            // scroll
+
+            $(window).scroll(function () { subNav(); });
+           // $(window).resize(function () { subNav(); });
+         //   $(window).on('resize', function () { subNav().reload(); });
+        }
+
+        //  $(window).on('resize',function(){location.reload();});
+        /* $(window).bind('resize',function(){
+              window.location.href = window.location.href;
+         }); */
+
+    // For the window Refresh
+        var context;
+        var $window = $(window);
+        // run this right away to set context
+        if ($window.width() <= 768) {
+            context = 'small';
+        }/* else if (768 < $window.width() < 970) {
+            context = 'medium';
+        } else {
+            context = 'large';
+        }*/
+
+        // refresh the page only if you're crossing into a context
+        // that isn't already set
+        $(window).resize(function () {
+            if (($window.width() <= 768) && (context != 'small')) {
+                //refresh the page
+                location.reload();
+            } /*else if ((768 < $window.width() < 970) && (context != 'medium')) {
+                location.reload();
+            } else if (context != 'large') {
+                location.reload();
+            }*/
+        });
+    });
+
+})(jQuery, Drupal);

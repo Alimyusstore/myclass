@@ -1,0 +1,25 @@
+
+// script for apply gradient on mobile
+
+function gradientHeroTextFunc() {
+  let heroTextMobileGradientBg = document.querySelectorAll(".wp-block-custom-ge-hero-secondary-variant-with-text .linear-gradient");
+
+  if (heroTextMobileGradientBg.length) {
+    for (let heroTextMobileGradientBgItem = 0; heroTextMobileGradientBgItem < heroTextMobileGradientBg.length; heroTextMobileGradientBgItem++) {
+      let gradientColorCode = heroTextMobileGradientBg[heroTextMobileGradientBgItem].getAttribute('data-color');
+      if (window.innerWidth <= 767) {
+        // heroTextMobileGradientBg[heroTextMobileGradientBgItem].style.background = `-moz-linear-gradient(top, rgba(${gradientColorCode}, 1) 37%,rgba(${gradientColorCode}, 0.49) 69%, rgba(${gradientColorCode}, 0) 100%)`;
+        // heroTextMobileGradientBg[heroTextMobileGradientBgItem].style.background = `-webkit-linear-gradient(top, rgba(${gradientColorCode}, 1) 37%,rgba(${gradientColorCode}, 0.49) 69%, rgba(${gradientColorCode}, 0) 100%)`;
+        heroTextMobileGradientBg[heroTextMobileGradientBgItem].style.background = `linear-gradient(to bottom, rgba(${gradientColorCode}, 1) 37%,rgba(${gradientColorCode}, 0.49) 69%, rgba(${gradientColorCode}, 0) 100%)`;
+      }
+      else {
+        heroTextMobileGradientBg[heroTextMobileGradientBgItem].style.background = `linear-gradient(to right,rgba(${gradientColorCode}, 1) 0%,rgba(${gradientColorCode}, 0.99) 1%,rgba(${gradientColorCode}, 0.5) 55%,rgba(${gradientColorCode}, 0.49) 56%,rgba(${gradientColorCode}, 0) 100% )`;
+      }
+    }
+  }
+};
+
+gradientHeroTextFunc();
+window.addEventListener('resize', function (event) {
+  gradientHeroTextFunc();
+}, true);

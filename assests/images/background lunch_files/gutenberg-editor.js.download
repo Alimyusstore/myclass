@@ -1,0 +1,26 @@
+(function ($) {
+
+  $(document).ajaxSend(function(event, request, settings) {
+    if ( settings.url == "/editor/media/dialog?types=image" ) {
+      $(".page-content.gutenberg-full-editor .overlay").fadeIn(300);　
+    }
+  });
+
+  $(document).ajaxComplete(function (event, request, settings) {
+    if ( settings.url == "/editor/media/dialog?types=image" ) {
+      $(".page-content.gutenberg-full-editor .overlay").fadeOut(300);
+    }
+  });
+
+})(jQuery);
+
+
+document.addEventListener("click", function(e){
+  var elements = document.querySelectorAll('button[aria-label="Font size"] + ul[role="listbox"] > li[role="option"]');
+  elements.forEach(function(element) {
+    if (element.innerText === "Default") {
+      element.classList.add("hidden");
+      return;
+    };
+  });
+}, false);

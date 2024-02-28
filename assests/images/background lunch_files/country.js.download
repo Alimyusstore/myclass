@@ -1,0 +1,1 @@
+(function () { /*NG Nigeria lang:English*/	var country = {'code':'ng','id':53,'defaultLangauge':'en-us'};	if (!window.evidon) window.evidon = {};	if (window.evidon.notice) {window.evidon.notice.setLocation(country);}	window.evidon.location = country;})(); 

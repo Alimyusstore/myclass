@@ -1,0 +1,1 @@
+!function(){var e,i;e=jQuery,i=drupalSettings,e(document).ready((function(){e("a.email-icon.mobilenav-link").attr("href",i.ge_unified_menu.contact_link),e("a.globe-icon.mobilenav-link").attr("href",i.ge_unified_menu.global_directory),e("a.ge-stock-ticker").attr("href",i.ge_unified_menu.ge_stock_ticker_path)}))}();

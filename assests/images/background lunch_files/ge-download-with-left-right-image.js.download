@@ -1,0 +1,13 @@
+// Video play Script
+var downloadLRID = document.querySelectorAll(".wp-block-custom-ge-download-with-left-right-image .play-icon-container")
+for (var downloadLRItem = 0; downloadLRItem < downloadLRID.length; downloadLRItem++) {
+    downloadLRID[downloadLRItem].addEventListener("click", function () {
+        var dwVideoContainer = this.closest('.wp-block-custom-ge-download-with-left-right-image');
+        var dwVideoIframe = dwVideoContainer.querySelector("iframe");
+        dwVideoContainer.classList.add('active');
+        dwVideoIframe.click()
+        var dwVideoSrc = dwVideoIframe.getAttribute('src') + "&autoplay=true";
+        dwVideoIframe.setAttribute("src", dwVideoSrc);
+
+    });
+}

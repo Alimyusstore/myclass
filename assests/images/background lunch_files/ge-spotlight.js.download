@@ -1,0 +1,110 @@
+// Place your frontend scripts here
+
+//import $ from "jquery";
+// Import Slick
+//import 'slick-carousel/slick/slick.min';
+(function ($, Drupal) {
+
+  document.documentElement.setAttribute("data-browser", navigator.userAgent);
+  
+  $(document).ready(function(){
+
+    for(var i = 0; i <= 9; i++) {   
+      if ($(".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .slider-items").length) {
+        // Get count of slides
+        $(".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .slider-items").on("init reinit", function(event, slick){
+          if (slick.slideCount > 0 && !isNaN(slick.slideCount)) {
+            var slideMargin = parseInt($(slick.$slides[0]).css('margin-right'));
+            var slideTotalWidth = slick.$slides[0].clientWidth + slideMargin;
+            var slidesWidth = (slideTotalWidth * slick.slideCount) - slideMargin;
+
+            //check if total width of slides is less than the slider window
+            if (slidesWidth < slick.$slider[0].clientWidth ) {
+              $(".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] div.carousel-control").addClass("control-hidden");
+            }
+            else {
+              $(".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] div.carousel-control").removeClass("control-hidden");
+            }        
+          }
+        });
+
+        $(".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .slider-items").slick({
+          speed: 300,
+          slidesToShow: 3.25,
+          slidesToScroll: 1,
+          
+          prevArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-prev",  
+          nextArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-next",
+          
+          infinite: false,
+          mobileFirst: true,
+          rows: 1,
+          variableWidth: true,
+          
+          responsive: [{
+              breakpoint: 1200, //mf min(1200)
+              settings: {
+                slidesToShow: 2.2,
+                slidesToScroll: 1,
+                rows: 1,
+                prevArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-prev",  
+                nextArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-next",
+                variableWidth: true,
+              },
+            }, {
+              breakpoint: 992,  //mf min(992)
+              settings: {
+                slidesToShow: 1.8,
+                slidesToScroll: 1,
+                rows: 1,
+                prevArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-prev",  
+                nextArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-next",
+                variableWidth: true,
+              },
+            }, {
+              breakpoint: 767, //mf min(767)
+              settings: {
+                slidesToShow: 1.6,
+                slidesToScroll: 1,
+                rows: 1,
+                prevArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-prev",  
+                nextArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-next",
+                variableWidth: true,
+              },
+            }, {
+              breakpoint: 576,  //mf min(576)
+              settings: {
+                slidesToShow: 1.5,
+                slidesToScroll: 1,
+                centerMode: true,
+                rows: 1,
+                prevArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-prev",  
+                nextArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-next",
+                variableWidth: true,
+              },
+            }, {          
+              breakpoint: 300,  //mf min(320)
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                centerMode: true,
+                rows: 1,
+                prevArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-prev",  
+                nextArrow: ".wp-block-custom-ge-spotlight[data-ge-spotlight-instance-id = '" + i + "'] .ctrl-next",
+                variableWidth: true,
+              },
+            },
+            
+
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+          ]              
+        }); 
+        
+      }
+    }
+
+  });  
+  
+})(jQuery, Drupal);

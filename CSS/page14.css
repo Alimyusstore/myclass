@@ -1,0 +1,155 @@
+*{
+    margin: 5px   
+}
+
+body{
+    background-color: rgb(19, 19, 19);
+
+}
+
+#first{
+    width: 400px;
+    height: 300px;
+    border-radius: 20px;
+    display: block;
+}
+
+#second {
+    width: 200px;
+    height: 200px;
+    display: block;
+    /* object-fit: ;
+    object-position: ; */
+}
+
+#third{
+    border-radius: 100%;
+    width: 200px;
+    height: 170px;
+    display: block;
+}
+
+#search{
+    
+    display: block;
+    width: 170px;
+    font-size: 16px;
+    /* height: 30px; */
+    border-radius: 7px;
+    border: 0.1px solid rgb(160, 159, 159);
+    padding: 8px; 
+    background-color: rgb(255, 255, 255);
+}
+
+#second-search {
+    width: 400px;
+    display: block;
+    border: 0;
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.1);
+    padding: 8px;
+}
+
+label{
+    display: block;
+}
+#email{
+    width: 300px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: block;
+    height: 20px;
+}
+
+span {
+    color: grey;
+    font-size: 14px;
+}
+
+button[type="submit"]{
+    background-color: rgb(3, 3, 194);
+    color: #fff;
+    border-radius: 50px;
+    border: 0;
+    display: block;
+    width: 300px;
+    font-size: 14px;
+    padding: 15px;
+    
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    width: 400px;
+    position: relative;;
+}
+
+#fourth{
+    width: 55px;
+    border-radius: 50%;
+    height: 50px;
+}
+
+
+div span {
+    font-size: 20px;
+    position: absolute;
+    bottom: 25px;
+    padding-left: 5px;
+}
+
+button[type="button"]{
+    background-color: rgb(76, 107, 208);
+    color: #fff;
+    border-radius: 50px;
+    border: 0;
+    display: block;
+    font-size: 15px;
+    padding: 9px 15px;
+    
+}
+
+.para {
+    color: #fff;
+    width: 290px;
+    font-size: 22px;
+    display: inline-block;
+    vertical-align: middle;
+
+}
+
+.yesno {
+    font-size: large;
+}
+
+.google, .sign-up {
+    background-color: #fff;
+    padding: 10px;
+    /* align-content: center; */
+    width: 450px;
+
+}
+
+img[alt="google logo"]{
+    width: 200px;
+    margin-left: 25%;
+    /* object-position: middle; */
+
+}
+
+#google{
+    width: 400px;
+    padding: 15px;
+    font-size: 17px;
+    border: 0;
+    background-color: rgb(243, 239, 239);
+    border-radius: 50px;
+    box-shadow: 1px 2px 1px 2px rgba(152, 148, 148, 0.3);
+}
+
+#firstname{
+    display: inline-block;
+    
+}

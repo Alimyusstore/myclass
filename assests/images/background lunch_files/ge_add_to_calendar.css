@@ -1,0 +1,48 @@
+/* GE Add to Calendar Button Style */
+ul.ge-add-calendar-list {
+	list-style: none;
+	background-color: #ffffff;
+	padding-left: 0px;
+	margin: 0px 0px 0px 10px;
+	width: 172px;
+	color: #000000;
+}
+.ge-add-calendar-wrapper span.ge-add-to-calendar {
+	visibility: hidden;
+}
+
+.ge-add-calendar-wrapper h6 {
+	letter-spacing: 1.56px;
+}
+
+.show {
+  visibility: visible !important;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+ul.ge-add-calendar-list li a {
+	text-decoration: none;
+	margin: 15px 0px 15px 10px;
+	color: inherit;
+}
+ul.ge-add-calendar-list li:hover {
+	background-color: #0870d8;
+	color: #ffffff;
+}
+
+.ge-ir-events-body .ge-pop-calendar {
+	background-color: transparent;
+	border: none;
+}
+
+.ge-ir-events-body .ge-pop-calendar h6 {
+	border-bottom: 1.5px solid #979797;
+  line-height: 26px;
+}
+.ge-ir-events-body .ge-pop-calendar {
+	padding: 0px;
+}
+.ge-ir-events-body ul.ge-add-calendar-list {
+	margin: 0px;
+	width: 144px;
+}

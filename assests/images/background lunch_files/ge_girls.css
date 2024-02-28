@@ -1,0 +1,817 @@
+/*
+####################################################################
+Full width style add class name  "ge-webform" 
+background style (default style is transparent)
+"ge-webform light-bg"(light background)
+"ge-webform dark-bg"(dark background)
+
+Button style (default style is center)
+"ge-webform btn--right"(right align)
+"ge-webform btn--left"(Left align)
+ 
+####################################################################
+ */
+/* Full width style */
+.ge-webform {
+    background-color: transparent;
+    display: flex;
+    width: 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+
+
+.ge-webform .form,
+.ge-webform .block {
+    width: 81.25%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 40px 10px;
+}
+
+.ge-webform .field__label.font-weight-bold {font-size: calc(22px + 1.02vw);line-height: initial;/* color: #fff; */}
+.ge-webform form .form-group {
+    margin-bottom: 2rem;
+}
+
+.ge-webform .form-group h6,
+.ge-webform .form-group label,
+.ge-webform fieldset.card legend,
+.ge-webform .form-check-label,
+.ge-webform .js-form-type-webform-markup p {
+    text-transform: uppercase;
+    font-family: gesans-bold;
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 2px;
+    color: var(--ge-white);
+    display: flex;
+    width: 100%;
+}
+.ge-webform .js-form-type-webform-markup {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.ge-webform .js-form-type-webform-markup p a {
+    padding: 0 5px;
+}
+.ge-webform .form-group select.form-select, 
+.ge-webform .form-group input.form-control {
+    height: 52px;
+    border-radius: 29.5px;
+    border: none;
+    outline: none;
+    padding-left: 32px;
+    color: var(--ge-white);
+    font-size: 18px;
+    line-height: 24px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: all .5s ease;
+    width:100%;
+    /* border: none; */
+}
+
+.ge-webform .form-group .form-textarea {
+    border: none;
+    outline: none;
+    padding-left: 32px;
+    color: var(--ge-white);
+    font-size: 18px;
+    line-height: 24px;
+    background-color: rgba(255, 255, 255, 0.05);
+    transition: all .5s ease;
+    border: 2px solid #ffff;
+}
+
+.ge-webform .form-group input.form-control,
+.ge-webform .form-group .form-textarea,
+.ge-webform .form-group.custom_select {
+    width: 100% !important;
+}
+
+.ge-webform .form-group input.form-control:hover,
+.ge-webform .form-group input.form-control:focus,
+.ge-webform .form-group select.form-select:hover,
+.ge-webform .form-group select.form-select:focus,
+.ge-webform .form-group .form-textarea:hover,
+.ge-webform .form-group .form-textarea:focus {
+    box-shadow: none;
+    border: solid 2px rgba(255,255, 255, 0.4) !important;
+}
+
+.ge-webform .form-group.custom_select:before {
+    border: 1px solid #fff;
+}
+
+.ge-webform .form-group.custom_select:after {
+    border-top: 5px solid #fff;
+}
+
+.ge-webform .form-actions input.button {
+    font-family: gesans-bold;
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 2px;
+    height: 52px;
+    border-radius: 26px;
+    padding: 0 2em;
+    color: var(--ge-white);
+     background-color: #007bff;
+    border: 2px solid #007bff;
+    text-transform: uppercase;
+}
+
+
+.ge-webform .form-actions input.button:hover {
+     border: 2px solid var(--ge-primary-blue-button-border-hover);
+    background-color: var(--ge-primary-blue-button-hover);
+
+}
+
+.ge-webform fieldset {
+    background-color: transparent;
+    border: 0;
+}
+.ge-webform .card { background-color:transparent; border:none}
+.ge-webform fieldset .card-header {
+    background-color: transparent;
+    border: 0;
+    padding-left: 0;
+    padding-top: 0;
+}
+
+.ge-webform fieldset .card-body.fieldset-wrapper {
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+.ge-webform fieldset .js-webform-radios {
+    display: flex;
+    flex-wrap: wrap;
+}
+.ge-webform .js-webform-states-hidden.js-form-wrapper {
+    display: flex;
+    width: 100%;
+}
+.ge-webform fieldset .js-form-type-radio {
+    flex: 0 0 25%;
+    display: flex;
+    align-items: center;
+}
+
+.ge-webform fieldset .form-check-input {
+    margin-top: 0;
+}
+
+.ge-webform fieldset .js-webform-radios h6 {
+    margin: 0;
+}
+
+.ge-webform .js-form-type-webform-markup p {
+    text-transform: none;
+    font-family: 'gesans-regular';
+}
+
+.ge-webform small.description.form-text.text-muted {
+    display: flex;
+    flex: 0 0 100%;
+}
+
+.ge-webform .webform-element-description {
+    font-size: 14px;
+    line-height: 1.14;
+    letter-spacing: 2px;
+    color: var(--ge-white);
+    margin-top: 15px;
+}
+
+.ge-webform .form-actions {
+    display: flex;
+    flex: 0 0 100%;
+    justify-content: left;
+}
+
+.ge-webform.btn--left .form-actions {
+    justify-content: left;
+}
+
+.ge-webform.btn--right .form-actions {
+    justify-content: right;
+    padding-right: 5%;
+}
+
+/* light background style */
+.ge-webform.light-bg {
+    background-color: var(--ge-grey);
+}
+
+.ge-webform.light-bg .form-group h6,
+.ge-webform.light-bg .form-group label,
+.ge-webform.light-bg fieldset.card legend,
+.ge-webform.light-bg .form-check-label,
+.ge-webform.light-bg .js-form-type-webform-markup p,
+.ge-webform.light-bg .webform-element-description {
+    color: var(--ge-dark-blue-grey);
+}
+
+.ge-webform.light-bg .form-group input.form-control:hover,
+.ge-webform.light-bg .form-group input.form-control:focus,
+.ge-webform.light-bg .form-group select.form-select:hover,
+.ge-webform.light-bg .form-group select.form-select:focus,
+.ge-webform.light-bg .form-group .form-textarea:hover,
+.ge-webform.light-bg .form-group .form-textarea:focus {
+    border: 2px solid rgba(30,47,70,.4)!important
+}
+
+.ge-webform.light-bg .form-group input.form-control,
+.ge-webform.light-bg .form-group select.form-select,
+.ge-webform.light-bg .form-group .form-textarea {
+    color: var(--ge-dark-blue-grey);
+    background-color: #fff;
+}
+
+.ge-webform.light-bg .form-actions input.button {
+    color: var(--ge-white);
+        background-color: #007bff;
+    border-color: #007bff;
+}
+
+.ge-webform.light-bg .form-actions input.button:hover{
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.ge-webform.light-bg .form-group.custom_select:before {
+    border: 1px solid var(--ge-dark-blue-grey);
+}
+
+.ge-webform.light-bg .form-group.custom_select:after {
+    border-top: 5px solid var(--ge-dark-blue-grey);
+}
+
+/* Dark background style */
+.ge-webform.dark-bg {
+    background-color: #1e2f46;
+}
+
+.ge-webform.dark-bg .ge-webform .form-group select.form-select option {
+    color: inherit !important;
+}
+
+.ge-webform.dark-bg .form-group.custome_select:before {
+    border-color:#fff;
+}
+.ge-webform.dark-bg .form-group.custome_select:after {
+    border-top-color: #fff;
+}
+
+.ge-webform.dark-b field__label font-weight-bold,
+.ge-webform.dark-bg .form-group h6,
+.ge-webform.dark-bg .form-group label,
+.ge-webform.dark-bg fieldset.card legend,
+.ge-webform.dark-bg .form-check-label,
+.ge-webform.dark-bg .js-form-type-webform-markup p,
+.ge-webform.dark-bg .webform-element-description {
+    color: var(--ge-white);
+}
+
+
+
+.ge-webform.dark-bg .form-group input.form-control, .ge-webform.dark-bg .form-group .form-textarea {
+    color: var(--ge-white);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.ge-webform.dark-bg .select.form-select,
+.ge-webform.dark-bg .custome_select select,
+.ge-webform.dark-bg .form-group .form-textarea {
+    border: solid 2px transparent;
+    outline: none;
+}
+
+.ge-webform.dark-bg .custome_select select {
+    border: solid 2px transparent !important;
+}
+
+.ge-webform.dark-bg .custome_select select:hover,
+.ge-webform.dark-bg .custome_select select:focus {
+    border: solid 2px rgba(255,255, 255, 0.4) !important
+}
+
+.ge-webform.dark-bg .custome_select select:hover,
+.ge-webform.dark-bg .custome_select select:focus,
+.ge-webform.dark-bg .form-group .form-textarea:hover,
+.ge-webform.dark-bg .form-group .form-textarea:focus {    
+    border: solid 2px rgba(255,255, 255, 0.4) !important;
+}
+
+
+
+.ge-webform.dark-bg .form-actions input.button {
+    color: var(--ge-white);
+}
+.ge-webform.dark-bg .form-group.custom_select:before {
+    border:1px solid var(--ge-white);
+}
+
+.ge-webform.dark-bg .form-group.custom_select:after {
+    border-top: 5px solid var(--ge-white);
+}
+
+.ge-webform.dark-bg .field__label.font-weight-bold { color: #fff; }
+.ge-webform.dark-bg select.form-select option {
+    color: #212529;
+}
+
+
+/* 2 column style */
+.ge-webform.col-2-webform .form-group input.form-control
+.ge-webform.col-2-webform .form-group .form-textarea
+.ge-webform.col-2-webform .form-group.custom_select {
+    width: 90% !important;
+}
+
+.col-2-webform form .form-group
+ .col-2-webform form fieldset.fieldgroup {
+    margin-bottom: 2rem;
+    flex: 0 0 50%;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 50%;
+    align-content: baseline;
+}
+
+.col-2-webform form .form-group.custom_select {
+    flex: 0 0 90%;
+    max-width: 90%;
+}
+
+.col-2-webform form .form-group.js-form-type-select h6 {
+    display: flex;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.ge-webform.col-2-webform .js-form-type-webform-markup {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.ge-webform.col-2-webform form {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media (max-width:767px) {
+    .ge-webform .js-form-type-webform-markup p {
+        display: block;
+        width: 100%;
+    }
+    .col-2-webform form .form-group
+    .col-2-webform form fieldset.fieldgroup
+    
+    .col-2-webform form .form-group.custom_select{
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+    .ge-webform.col-2-webform .form-group input.form-control
+    .ge-webform.col-2-webform .form-group .form-textarea
+    .ge-webform.col-2-webform .form-group.custom_select{
+        width: 100% !important;
+    }    
+}
+
+/*
+ * Changes for mail icon 
+ */
+ nav.ge-menu-main ul.ge-nav-icons-desktop li:first-child {
+    margin-left: 5px;
+    margin-right: 0;
+  }
+  
+  .nav-item.icon i.icon.ficon-email {
+    font-size: 18px !important;
+    line-height: 24px;
+    padding: 0 !important;
+  }
+  
+  a#email-icon {
+    padding: 0.5rem !important;
+  }
+  
+  nav.ge-menu-main ul.ge-nav-icons-desktop li:nth-child(2) {
+    margin: 0 5px
+  }
+  
+  nav.ge-menu-main ul.navbar-nav li.nav-item a.nav-link {
+    padding-left: 29px !important;
+    padding-right: 29px !important;
+  }
+  
+  nav.ge-menu-main li.nav-item.header-stock-ticker {
+    margin-left: 0 !important;
+  }
+  .mobile-navbar .header-stock-ticker { padding-left:20px}
+  .mobile-navbar .icon { padding-left:10px}
+  .dd-bg { right:-3px }
+  
+
+/* CSS for Union Negotiations modal */
+
+
+.ge-union .modal-content {
+    background-color: #f0f3f7;
+    color: #1e2f46;
+    border: 0;
+    box-shadow: none;
+}
+
+.ge-union .close { 
+    color: var(--ge-white);
+    text-shadow: none;
+    opacity: 1;
+}
+.ge-union .modal-header {
+    border: 0;
+    padding: 20px 25px 20px 25px;
+    color: var(--ge-white);
+    background-color: var(--ge-primary-blue);
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+}
+.ge-union .modal-header button {
+  margin-top: -16px !important;
+}
+.ge-union .modal-body {
+    padding: 15px;
+}
+.ge-union p.modal-subtitle {
+    padding: 0px 0px 0px 10px;
+}
+.ge-union .modal-header .close { 
+    margin-top: -10px; 
+    outline: none; 
+}
+.ge-union .model-title {
+    font-size: 26px;
+    font-family: gesans-bold;
+}
+.ge-union .modal-footer {
+    display: block; 
+    border: 0;
+    padding-top: 10px;
+    padding-bottom: 25px;
+}
+
+.ge-union .button-size-medium {
+    width:max-content;
+    margin: 0 auto;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.ge-union .form-group input {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+}
+
+.ge-union .modal-text label {    
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    padding: 10px 0 0 0;
+    font-weight: 700;
+    
+}
+
+.ge-union .modal-step.ge {
+    padding: 0px 15px;
+}
+
+.ge-union .step-text {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.ge-union input[type=checkbox], .ge-union input[type=radio] {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+.ge-union .modal-radio label {
+    display: inline-flex;
+    padding-right: 32px;
+    font-weight: 700;
+}
+.ge-sso-div .gesso::placeholder {
+  color: #6c757d;
+}
+
+button.take-action-button {
+  outline: none;
+}
+.ge-download-block .ge-union-download {
+  color: #fff;
+}
+
+.voices-inline .ge-union.button-primary,.voices-inline .ge-union.button-primary a  {
+  outline: none;
+}
+
+.modal-dialog.modal-lg {
+  max-width: 800px !important;
+}
+
+.ge-union .modal-body .alert.alert-dismissible {
+  margin-bottom: 0px;
+}
+.modal-backdrop {
+  opacity: 0.5;
+}
+.modal.ge-union .button-primary:hover {
+  background-color: #0056b3;
+}
+button#ge-take-actions:focus,
+button#ge-take-actions:hover,
+button#ge-take-actions:visited {
+  line-height: 52px;
+  color: #0870d8;
+}
+.modal.ge-union .pl-3.hidden.ge-sso-div {
+    position: relative;
+    top: -3px;
+}
+
+.ge-union #subscribed-success {
+  width: 80%;
+  margin: auto;
+  padding-top: 50px;
+}
+
+.ge-union-main .ge-basic-header.header--ge-primary-blue h1 {
+  margin-bottom: 1.7em;
+}
+
+.modal-open {
+  overflow: hidden; }
+  .modal-open .modal {
+    overflow-x: hidden;
+    overflow-y: auto; }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  outline: 0; }
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 0.5rem;
+  pointer-events: none; }
+  .modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px); }
+    @media (prefers-reduced-motion: reduce) {
+      .modal.fade .modal-dialog {
+        transition: none; } }
+  .modal.show .modal-dialog {
+    transform: none; }
+
+.modal-dialog-scrollable {
+  display: flex;
+  max-height: calc(100% - 1rem); }
+  .modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 1rem);
+    overflow: hidden; }
+  .modal-dialog-scrollable .modal-header,
+  .modal-dialog-scrollable .modal-footer {
+    flex-shrink: 0; }
+  .modal-dialog-scrollable .modal-body {
+    overflow-y: auto; }
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem); }
+  .modal-dialog-centered::before {
+    display: block;
+    height: calc(100vh - 1rem);
+    content: ""; }
+  .modal-dialog-centered.modal-dialog-scrollable {
+    flex-direction: column;
+    justify-content: center;
+    height: 100%; }
+    .modal-dialog-centered.modal-dialog-scrollable .modal-content {
+      max-height: none; }
+    .modal-dialog-centered.modal-dialog-scrollable::before {
+      content: none; }
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0; }
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000; }
+  .modal-backdrop.fade {
+    opacity: 0; }
+  .modal-backdrop.show {
+    opacity: 0.5; }
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem; }
+  .modal-header .close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto; }
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5; }
+
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: 1rem; }
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem; }
+  .modal-footer > :not(:first-child) {
+    margin-left: .25rem; }
+  .modal-footer > :not(:last-child) {
+    margin-right: .25rem; }
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll; }
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto; }
+  .modal-dialog-scrollable {
+    max-height: calc(100% - 3.5rem); }
+    .modal-dialog-scrollable .modal-content {
+      max-height: calc(100vh - 3.5rem); }
+  .modal-dialog-centered {
+    min-height: calc(100% - 3.5rem); }
+    .modal-dialog-centered::before {
+      height: calc(100vh - 3.5rem); }
+  .modal-sm {
+    max-width: 300px; } }
+
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl {
+    max-width: 800px; } }
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 1140px; } }
+
+/*header and footer script*/	
+	@media screen and (max-width: 1050px) {
+	  div#wheel-css {
+	   display: none;
+	  }
+	 h6.wheel-css {
+	   display: none;
+	  }
+	}
+	.fls-block h6 {
+		font-size: 17px;
+	}
+
+	.fls-block form .custome_select {
+		width: 35%;
+		padding: 0px;
+	}
+	.fls-block .form-select{
+		padding: 0rem 2rem;
+		border: none;
+		width: 100%;
+		height: 64px;
+		border-radius: 10px;
+		background-color: var(--ge-white);
+		font-size: 22px;
+		outline: none;	
+	}
+	.fls-block .custome_select:before
+	{
+		bottom: 34% !important;
+		pointer-events: none;
+	}
+	.fls-block .custome_select:after
+	{
+		bottom: 37% !important;
+		pointer-events: none;
+	}
+	.fls-block .text-muted {
+		font-size: 18px;
+		margin: 1rem 0;
+	}
+	.download-table ul.download-table-header {
+		list-style: none;
+		display: flex;
+		padding: 0px;
+		margin: 0px;
+	}
+	.download-table ul {
+		margin: 0;
+		padding: 0px;
+		list-style: none;
+	}
+	.download-table ul> li{
+		position: relative;
+		width: 100%;
+		border-bottom: 1px solid rgba(30, 47, 70, 0.1);
+	}
+	ul.download-table-header.text-uppercase {
+		border-top: none;
+	}
+	.download-table ul {
+		border-top: 2px solid var(--ge-light-blue);
+	}
+	.fls-results {
+		width: 100%;
+		margin-bottom: 120px;
+	}
+	.download-table ul li{
+		position: relative;
+		width: 100%;
+		border-bottom: 1px solid rgba(30, 47, 70, 0.1);
+	}
+	.download-table ul li a {
+		color: var(--ge-dark-blue-grey);
+		letter-spacing: normal;
+		font-size: 26px;
+		font-family: gesans-regular !important;
+		line-height: 3.46;
+	}
+	.ficon-download::before {
+		float: right;
+		font-family: icomoon!important;
+	}
+	.fls-block .views-exposed-form {
+		margin-bottom: 40px;
+	}
+	@media (max-width:767px) {
+	.fls-block form .custome_select{
+		width: 100%;
+	}
+	.fls-block h6 {
+		font-size: 15px;
+	}
+	.fls-block form .custome_select {
+		width: 100%;
+		padding: 0px;
+	}
+	.fls-block .form-select{
+	font-size: 17px;
+	}
+	.fls-block .text-muted {
+		font-size: 17px;
+	}
+	.download-table ul li a {
+		font-size: 18px;
+	}
+	}
+
+.leadership-profile-wrapper section.leadership-header { max-height:inherit !important}
