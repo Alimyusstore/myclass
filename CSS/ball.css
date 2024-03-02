@@ -85,52 +85,39 @@ section{
 .bounce14 {
     animation: bounce 23.8s alternate infinite ease-in-out;
 }
+
+.bounss{
+    animation-play-state: running;
+    animation-fill-mode: forwards;
+}
 .bounce1 {
     transition: background-image  1s ease-in-out;
     animation: bounce1 1s infinite ease-in alternate;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-
 }
 .bounce2 {
     border-color: rgb(221, 255, 0) rgb(242, 58, 92) rgb(72, 225, 55) rgb(16, 73, 229);
     left: 15%;
     animation: bounce1 1.5s infinite ease-in alternate;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-
 }
 .bounce3{
     border-color: rgb(93, 85, 232) rgb(250, 142, 109) rgb(110, 215, 247) rgb(242, 102, 102);
     left: 30%;
     animation: bounce1 1.2s infinite ease-in alternate;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-
 }
 .bounce4 {
     border-color: rgb(204, 153, 75) rgb(0, 156, 218) rgb(225, 151, 55) rgb(229, 16, 204);
     left: 50%;
     animation: bounce1 1.6s infinite ease-in;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-
 }
 .bounce5 {
     border-color: rgb(0, 255, 55) rgb(223, 23, 170) rgb(105, 175, 73) rgb(228, 205, 100);
     left: 70%;
     animation: bounce1 1.4s infinite ease-in;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-
 }
 .bounce6 {
     border-color: rgb(236, 172, 32) rgba(88, 53, 159, 0.276) rgb(55, 225, 109) rgb(16, 229, 91);
     left: 90%;
     animation: bounce1 1.1s infinite ease-in;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-
 }
 
 @keyframes bounce1 {
