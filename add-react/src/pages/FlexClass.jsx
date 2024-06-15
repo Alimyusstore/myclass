@@ -1,4 +1,3 @@
-import "../CSS/pageflex.css"
 import men from "../assest/images/2 men.jpg";
 import plant from "../assest/images/plant3.jpeg";
 import jewel from "../assest/images/jewel7.jpeg";
