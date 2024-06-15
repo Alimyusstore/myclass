@@ -1,21 +1,3 @@
-body{
-    overflow-x: hidden;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-}
-
-.div {
-  margin-top: 10%;
-  width: 200px;
-  height: 200px;
-  border-color: rgb(9, 105, 105) rgb(216, 135, 110) rgb(35, 27, 16)
-    rgb(16, 229, 91);
-  border-radius: 50%;
-  border-style: solid;
-  transition: 1.5s background-image ease;
-}
-
 @keyframes ball {
   from {
     background-image: repeating-radial-gradient(
@@ -68,11 +50,6 @@ body{
   animation: bounce 2s alternate infinite ease-in-out;
   transition: background-image 1s ease-in-out;
 
-}
-
-.bounss {
-  animation-play-state: running;
-  animation-fill-mode: forwards;
 }
 .bounce2 {
   border-color: rgb(221, 255, 0) rgb(242, 58, 92) rgb(72, 225, 55)

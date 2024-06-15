@@ -4,24 +4,29 @@ let bigBall = {
      marginTop: "10%",
      width: "200px",
      height: "200px",
-     borderColor: `rgb(9, 105, 105) rgb(216, 135, 110) rgb(35, 27, 16)
-    rgb(16, 229, 91)`,
+    borderColor: `rgb(9, 105, 105) rgb(216, 135, 110) rgb(35, 27, 16)
+                  rgb(16, 229, 91)`,
     borderRadius: "50%",
     borderstyle: "solid",
     transition: "1.5s background-image ease",
+}
+
+let bounss = {
+  animationPlayState: "running",
+  animationFillMode: "forwards"
 }
 function Ball (){
     return (
       <section style={{ height: "100vh", width: "100vw", overflowX: "hidden" }}>
         <div
-          className="div"
-    
-          style={{ bigBall, animation: "ball 2.5s alternate infinite ease-in" }}
+          style={{
+            ...bigBall,
+            animation: "ball 2.5s alternate infinite ease-in",
+          }}
         ></div>
         <div
-          className="div"
           style={{
-            bigBall,
+            ...bigBall,
             animation: "ballcourt 2.5s alternate infinite ease-out 2.5s",
             position: "absolute",
             left: "50%",
@@ -38,12 +43,20 @@ function Ball (){
           style={{ animationName: "bounce1", animationDuration: " 1.5s" }}
         ></div>
         <div
-          className=" boun bounss bounce3"
-          style={{ animationName: "bounce1", animationDuration: " 1.2s" }}
+          className=" boun bounce3"
+          style={{
+            ...bounss,
+            animationName: "bounce1",
+            animationDuration: " 1.2s",
+          }}
         ></div>
         <div
-          className=" boun bounss bounce4"
-          style={{ animationName: "bounce1", animationDuration: " 1.6s" }}
+          className=" boun bounce4"
+          style={{
+            ...bounss,
+            animationName: "bounce1",
+            animationDuration: " 1.6s",
+          }}
         ></div>
         <div
           className=" boun bounss bounce5"
